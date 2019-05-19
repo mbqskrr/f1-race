@@ -1,0 +1,226 @@
+[33mcommit 5a7199ebec173144150c74d90bd35f5473e8999e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Manuel Balanta <mbalantaq@gmail.com>
+Date:   Fri May 10 22:57:28 2019 -0500
+
+    Project created classes and fxml file
+
+[1mdiff --git a/.classpath b/.classpath[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3b2e843[m
+[1m--- /dev/null[m
+[1m+++ b/.classpath[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m[32m<classpath>[m
+[32m+[m	[32m<classpathentry kind="src" path="src"/>[m
+[32m+[m	[32m<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>[m
+[32m+[m	[32m<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>[m
+[32m+[m	[32m<classpathentry kind="output" path="bin"/>[m
+[32m+[m[32m</classpath>[m
+[1mdiff --git a/.project b/.project[m
+[1mnew file mode 100644[m
+[1mindex 0000000..393aa01[m
+[1m--- /dev/null[m
+[1m+++ b/.project[m
+[36m@@ -0,0 +1,23 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m[32m<projectDescription>[m
+[32m+[m	[32m<name>f1-race</name>[m
+[32m+[m	[32m<comment></comment>[m
+[32m+[m	[32m<projects>[m
+[32m+[m	[32m</projects>[m
+[32m+[m	[32m<buildSpec>[m
+[32m+[m		[32m<buildCommand>[m
+[32m+[m			[32m<name>org.eclipse.jdt.core.javabuilder</name>[m
+[32m+[m			[32m<arguments>[m
+[32m+[m			[32m</arguments>[m
+[32m+[m		[32m</buildCommand>[m
+[32m+[m		[32m<buildCommand>[m
+[32m+[m			[32m<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>[m
+[32m+[m			[32m<arguments>[m
+[32m+[m			[32m</arguments>[m
+[32m+[m		[32m</buildCommand>[m
+[32m+[m	[32m</buildSpec>[m
+[32m+[m	[32m<natures>[m
+[32m+[m		[32m<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>[m
+[32m+[m		[32m<nature>org.eclipse.jdt.core.javanature</nature>[m
+[32m+[m	[32m</natures>[m
+[32m+[m[32m</projectDescription>[m
+[1mdiff --git a/.settings/org.eclipse.jdt.core.prefs b/.settings/org.eclipse.jdt.core.prefs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3a21537[m
+[1m--- /dev/null[m
+[1m+++ b/.settings/org.eclipse.jdt.core.prefs[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32meclipse.preferences.version=1[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.compliance=1.8[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.debug.lineNumber=generate[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.debug.localVariable=generate[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.debug.sourceFile=generate[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.problem.assertIdentifier=error[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.problem.enumIdentifier=error[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.source=1.8[m
+[1mdiff --git a/bin/model/Car.class b/bin/model/Car.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5521a5a[m
+Binary files /dev/null and b/bin/model/Car.class differ
+[1mdiff --git a/bin/model/Player.class b/bin/model/Player.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ec3b947[m
+Binary files /dev/null and b/bin/model/Player.class differ
+[1mdiff --git a/bin/model/Trcuk.class b/bin/model/Trcuk.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2d27b1e[m
+Binary files /dev/null and b/bin/model/Trcuk.class differ
+[1mdiff --git a/bin/model/Vehicule.class b/bin/model/Vehicule.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bf9856d[m
+Binary files /dev/null and b/bin/model/Vehicule.class differ
+[1mdiff --git a/bin/ui/Main.class b/bin/ui/Main.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e5cfa10[m
+Binary files /dev/null and b/bin/ui/Main.class differ
+[1mdiff --git a/bin/ui/RaceController.class b/bin/ui/RaceController.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8c99e94[m
+Binary files /dev/null and b/bin/ui/RaceController.class differ
+[1mdiff --git a/bin/ui/race.fxml b/bin/ui/race.fxml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8b558ff[m
+[1m--- /dev/null[m
+[1m+++ b/bin/ui/race.fxml[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m
+[32m+[m[32m<?import javafx.scene.layout.Pane?>[m
+[32m+[m[32m<?import javafx.scene.shape.Line?>[m
+[32m+[m[32m<?import javafx.scene.shape.Rectangle?>[m
+[32m+[m
+[32m+[m
+[32m+[m[32m<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">[m
+[32m+[m[32m   <children>[m
+[32m+[m[32m      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#77818a" height="532.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="15.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="143.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="276.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="409.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="324.0" layoutY="276.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="325.0" layoutY="143.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="325.0" layoutY="15.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="325.0" layoutY="409.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m   </children>[m
+[32m+[m[32m</Pane>[m
+[1mdiff --git a/build.fxbuild b/build.fxbuild[m
+[1mnew file mode 100644[m
+[1mindex 0000000..168b398[m
+[1m--- /dev/null[m
+[1m+++ b/build.fxbuild[m
+[36m@@ -0,0 +1,8 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="ASCII"?>[m
+[32m+[m[32m<anttasks:AntTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:anttasks="http://org.eclipse.fx.ide.jdt/1.0" buildDirectory="${project}/build">[m
+[32m+[m[32m  <deploy>[m
+[32m+[m[32m    <application name="f1-race"/>[m
+[32m+[m[32m    <info/>[m
+[32m+[m[32m  </deploy>[m
+[32m+[m[32m  <signjar/>[m
+[32m+[m[32m</anttasks:AntTask>[m
+[1mdiff --git a/src/model/Car.java b/src/model/Car.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..fec7ac2[m
+[1m--- /dev/null[m
+[1m+++ b/src/model/Car.java[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32mpackage model;[m
+[32m+[m
+[32m+[m[32mpublic class Car {[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/model/Player.java b/src/model/Player.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..91c436c[m
+[1m--- /dev/null[m
+[1m+++ b/src/model/Player.java[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32mpackage model;[m
+[32m+[m
+[32m+[m[32mpublic class Player {[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/model/Trcuk.java b/src/model/Trcuk.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3e74d15[m
+[1m--- /dev/null[m
+[1m+++ b/src/model/Trcuk.java[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32mpackage model;[m
+[32m+[m
+[32m+[m[32mpublic class Trcuk {[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/model/Vehicule.java b/src/model/Vehicule.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e89eeb0[m
+[1m--- /dev/null[m
+[1m+++ b/src/model/Vehicule.java[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32mpackage model;[m
+[32m+[m
+[32m+[m[32mpublic abstract class Vehicule {[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/ui/Main.java b/src/ui/Main.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..de25c5e[m
+[1m--- /dev/null[m
+[1m+++ b/src/ui/Main.java[m
+[36m@@ -0,0 +1,10 @@[m
+[32m+[m[32mpackage ui;[m
+[32m+[m
+[32m+[m[32mpublic class Main {[m
+[32m+[m
+[32m+[m	[32mpublic static void main(String[] args) {[m
+[32m+[m		[32m// TODO Auto-generated method stub[m
+[32m+[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/ui/RaceController.java b/src/ui/RaceController.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5d0d3bf[m
+[1m--- /dev/null[m
+[1m+++ b/src/ui/RaceController.java[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32mpackage ui;[m
+[32m+[m
+[32m+[m[32mpublic class RaceController {[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/ui/race.fxml b/src/ui/race.fxml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8b558ff[m
+[1m--- /dev/null[m
+[1m+++ b/src/ui/race.fxml[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m
+[32m+[m[32m<?import javafx.scene.layout.Pane?>[m
+[32m+[m[32m<?import javafx.scene.shape.Line?>[m
+[32m+[m[32m<?import javafx.scene.shape.Rectangle?>[m
+[32m+[m
+[32m+[m
+[32m+[m[32m<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">[m
+[32m+[m[32m   <children>[m
+[32m+[m[32m      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#77818a" height="532.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="15.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="143.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="276.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="86.0" layoutY="409.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="324.0" layoutY="276.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="325.0" layoutY="143.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="325.0" layoutY="15.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m      <Line endX="100.0" layoutX="325.0" layoutY="409.0" startX="100.0" startY="100.0" stroke="#f6ff00" />[m
+[32m+[m[32m   </children>[m
+[32m+[m[32m</Pane>[m

@@ -1,5 +1,10 @@
 package model;
 
-public class Trcuk {
+public class Trcuk  {
 
+	public Trcuk() {
+		
+	}
+
+	
 }
