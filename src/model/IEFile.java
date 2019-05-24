@@ -10,9 +10,9 @@ import java.io.FileNotFoundException;
 
 public interface IEFile {
 	
-	public static final String PATH_EXPORT_PLAYER = "data/palyerReport.txt";
-	public static final String PATH_TRUCK = "data/trucks.txt";
-	public static final String PATH_CAR = "data/cars.txt";
+	public static final String PATH_EXPORT_PLAYERS = "data/palyerReport.txt";
+	public static final String PATH_TRUCKS = "data/trucks.txt";
+	public static final String PATH_CARS = "data/cars.txt";
 	
 	/**
 	 * 

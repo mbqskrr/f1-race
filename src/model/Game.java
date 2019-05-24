@@ -15,7 +15,7 @@ import java.io.Serializable;
  *
  */
 
-public class Game implements Serializable, Serialize{
+public class Game implements Serializable, Serialize, IEFile{
 	
 	/**
 	 * 
@@ -23,7 +23,6 @@ public class Game implements Serializable, Serialize{
 	private static final long serialVersionUID = 1L;
 	private Player root;
 	private Car first;
-	private String f = FILE;
 	
 	/**
 	 * 
@@ -70,7 +69,7 @@ public class Game implements Serializable, Serialize{
 	
 	@Override
 	public void save() throws IOException, FileNotFoundException{
-		File myFile = new File(f);
+		File myFile = new File(FILE);
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(myFile));
 		oos.writeObject(root);
 		oos.close();
@@ -78,12 +77,40 @@ public class Game implements Serializable, Serialize{
 
 	@Override
 	public void load() throws IOException, ClassNotFoundException {
-		File myFile = new File(f);
+		File myFile = new File(FILE);
 		if (myFile.exists()) {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(myFile));
 			root = (Player)ois.readObject();
 			ois.close();
 		}
+	}
+
+	@Override
+	public void loadTrucks(String path, String sep) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loadCars(String path, String sep) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportPlayersReport() throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public int getWeight(Player p) {
+		if (p != null) {
+			int left = getWeight(p.getLeft()); 
+			int right = getWeight(p.getRight());
+			int medio = 1;
+			return left + right + medio;
+		}
+		return 0;
 	}
 
 }
