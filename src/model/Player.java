@@ -2,7 +2,7 @@ package model;
 
 /**
  * 
- * @author W-7
+ * @author Manuel Balanta
  *
  */
 

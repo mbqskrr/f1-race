@@ -106,5 +106,9 @@ public class Car{
 	public void setPrev(Car prev) {
 		this.prev = prev;
 	}
+	
+	public void save() {
+		
+	}
 
 }

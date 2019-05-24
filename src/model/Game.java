@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * 
- * @author W-7
+ * @author Manuel Balanta
  *
  */
 
@@ -23,8 +23,11 @@ public class Game implements Serializable, Serialize{
 	private static final long serialVersionUID = 1L;
 	private Player root;
 	private Car first;
-	private String f = file;
+	private String f = FILE;
 	
+	/**
+	 * 
+	 */
 	public Game() {
 		
 	}

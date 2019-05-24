@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 /**
  * 
- * @author W-7
+ * @author Manuel Balanta
  *
  */
 public class Main extends Application{
