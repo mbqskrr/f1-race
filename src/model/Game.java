@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * 
+ * Clase principal del modelo del mundo
  * @author Manuel Balanta
  *
  */
@@ -103,6 +103,11 @@ public class Game implements Serializable, Serialize, IEFile{
 		
 	}
 	
+	/**
+	 * Este método permite conocer cuántos nodos tiene el ABB
+	 * @param p objeto de la clase player
+	 * @return el número de nodos que tiene el ABB
+	 */
 	public int getWeight(Player p) {
 		if (p != null) {
 			int left = getWeight(p.getLeft()); 

@@ -25,9 +25,9 @@
       </Button>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="605.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Opciones">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Jugar" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

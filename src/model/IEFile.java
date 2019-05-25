@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * 
+ * Interfaz para la importación y exportación de archivos de texto plana (.txt)
  * @author Manuel Balanta
  *
  */
@@ -30,7 +30,7 @@ public interface IEFile {
 	public void loadCars(String path, String sep) throws IOException;
 	
 	/**
-	 * 
+	 * Este método exporta los datos de la clase Player
 	 * @throws FileNotFoundException
 	 */
 	public void exportPlayersReport() throws FileNotFoundException;

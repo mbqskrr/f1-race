@@ -8,37 +8,22 @@ package model;
 
 public class Car{
 	
-	private static final int lives = 3; 
-	private int bonus;
+	private int lives; 
 	private int points;
 	private Car next;
 	private Car prev;
-
+	private String color;
+	
 	/**
-	 * 
+	 * Método constructor de la clase Player
 	 * @param color
 	 * @param bonus
 	 * @param points
 	 */
-	public Car(String color, int bonus, int points) {
-		this.bonus = bonus;
+	public Car(String color, int points, int lives) {
+		this.lives = lives;
 		this.points = points;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getBonus() {
-		return bonus;
-	}
-
-	/**
-	 * 
-	 * @param bonus
-	 */
-	public void setBonus(int bonus) {
-		this.bonus = bonus;
+		this.color = color;
 	}
 	
 	/**
@@ -73,6 +58,38 @@ public class Car{
 		this.next = next;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getLives() {
+		return lives;
+	}
+	
+	/**
+	 * 
+	 * @param lives
+	 */
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getColor() {
+		return color;
+	}
+	
+	/**
+	 * 
+	 * @param color
+	 */
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	/**
 	 * 
 	 * @return

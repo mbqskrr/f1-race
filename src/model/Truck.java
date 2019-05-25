@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * 
+ * @author Manuel Balanta
+ *
+ */
+
 public class Truck  {
 	
 	private Truck next;
