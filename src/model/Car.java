@@ -6,26 +6,27 @@ package model;
  *
  */
 
-public class Car{
+public class Car extends Vehicule{
 	
 	private int lives; 
 	private int points;
 	private Car next;
 	private Car prev;
-	private String color;
 	
 	/**
 	 * Método constructor de la clase Player
-	 * @param color
-	 * @param bonus
 	 * @param points
+	 * @param lives
+	 * @param color
+	 * @param width
+	 * @param height
 	 */
-	public Car(String color, int points, int lives) {
+	public Car(int points, int lives, String color, double width, double height) {
+		super(color, width, height);
 		this.lives = lives;
 		this.points = points;
-		this.color = color;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -78,22 +79,6 @@ public class Car{
 	 * 
 	 * @return
 	 */
-	public String getColor() {
-		return color;
-	}
-	
-	/**
-	 * 
-	 * @param color
-	 */
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
 	public Car getPrev() {
 		return prev;
 	}
@@ -106,6 +91,42 @@ public class Car{
 		this.prev = prev;
 	}
 	
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return super.getColor();
+	}
+
+	@Override
+	public void setColor(String color) {
+		// TODO Auto-generated method stub
+		super.setColor(color);
+	}
+
+	@Override
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return super.getWidth();
+	}
+
+	@Override
+	public void setWidth(double width) {
+		// TODO Auto-generated method stub
+		super.setWidth(width);
+	}
+
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return super.getHeight();
+	}
+
+	@Override
+	public void setHeight(double height) {
+		// TODO Auto-generated method stub
+		super.setHeight(height);
+	}
+
 	public void save() {
 		
 	}

@@ -15,7 +15,7 @@ import java.io.Serializable;
  *
  */
 
-public class Game implements Serializable, Serialize, IEFile{
+public class Game implements Serializable, Serialize, ExportFile{
 	
 	/**
 	 * 
@@ -86,18 +86,6 @@ public class Game implements Serializable, Serialize, IEFile{
 	}
 
 	@Override
-	public void loadTrucks(String path, String sep) throws IOException{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void loadCars(String path, String sep) throws IOException{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exportPlayersReport() throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		
@@ -116,6 +104,18 @@ public class Game implements Serializable, Serialize, IEFile{
 			return left + right + medio;
 		}
 		return 0;
+	}
+
+	@Override
+	public void exportTrucksReport() throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportCarsReport() throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
