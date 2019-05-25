@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 
-
 /**
  * Clase controladora del archvio (race) fxml
  * @author Manuel Balanta
@@ -107,25 +106,39 @@ public class RaceController {
 		btnLeft.setVisible(true);
 		btnRight.setVisible(true);
 		lblControl.setVisible(true);
+		move();
+	}
+	
+	public void move() {
+		moveUp();
+		moveDown();
+		moveRight();
+		moveLeft();
+	}
+	
+	private void moveUp() {
 		btnUp.setOnMouseClicked(new EventHandler<Event>() {
 			@Override
-			public void handle(Event event) {
+			public void handle(Event event) { 
 				if (car.getLayoutY()<=10) {
 					car.setLayoutY(car.getLayoutY()+15);
 					wheelL1.setLayoutY(wheelL1.getLayoutY()+15);
-					wheelL2.setLayoutY(wheelL2.getLayoutY()+15);
-					wheelR1.setLayoutY(wheelR1.getLayoutY()+15);
-					wheelR2.setLayoutY(wheelR2.getLayoutY()+15);
+		  		  	wheelL2.setLayoutY(wheelL2.getLayoutY()+15);
+		  		  	wheelR1.setLayoutY(wheelR1.getLayoutY()+15);
+		  		  	wheelR2.setLayoutY(wheelR2.getLayoutY()+15); 
 				} else {
 					car.setLayoutY(car.getLayoutY()-25);
 					wheelL1.setLayoutY(wheelL1.getLayoutY()-25);
 					wheelL2.setLayoutY(wheelL2.getLayoutY()-25);
 					wheelR1.setLayoutY(wheelR1.getLayoutY()-25);
-					wheelR2.setLayoutY(wheelR2.getLayoutY()-25);
+					wheelR2.setLayoutY(wheelR2.getLayoutY()-25); 
 				}
-				
-			}
-		});
+		  
+			} 
+		});		 
+	}
+	
+	private void moveDown() {
 		btnDown.setOnMouseClicked(new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
@@ -145,6 +158,9 @@ public class RaceController {
 				
 			}
 		});
+	}
+	
+	private void moveRight() {
 		btnRight.setOnMouseClicked(new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
@@ -163,6 +179,9 @@ public class RaceController {
 				}
 			}
 		});
+	}
+	
+	private void moveLeft() {
 		btnLeft.setOnMouseClicked(new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {

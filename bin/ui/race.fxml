@@ -4,16 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="674.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RaceController">
    <children>
-      <Pane fx:id="lane" prefHeight="674.0" prefWidth="605.0" style="-fx-background-color: grey;">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" layoutX="21.0" layoutY="520.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
-         </children>
-      </Pane>
+      <Pane fx:id="lane" prefHeight="674.0" prefWidth="605.0" style="-fx-background-color: grey;" />
       <Line endX="100.0" layoutX="85.0" layoutY="552.0" startX="100.0" startY="100.0" stroke="#f6ff00" />
       <Line endX="100.0" layoutX="322.0" layoutY="286.0" startX="100.0" startY="100.0" stroke="#f6ff00" />
       <Line endX="100.0" layoutX="322.0" layoutY="153.0" startX="100.0" startY="100.0" stroke="#f6ff00" />
