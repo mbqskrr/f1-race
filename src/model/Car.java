@@ -8,7 +8,7 @@ package model;
 
 public class Car{
 	
-	private int lives;
+	private static final int lives = 3; 
 	private int bonus;
 	private int points;
 	private Car next;
@@ -17,30 +17,12 @@ public class Car{
 	/**
 	 * 
 	 * @param color
-	 * @param lives
 	 * @param bonus
 	 * @param points
 	 */
-	public Car(String color, int lives, int bonus, int points) {
-		this.lives = lives;
+	public Car(String color, int bonus, int points) {
 		this.bonus = bonus;
 		this.points = points;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getLives() {
-		return lives;
-	}
-
-	/**
-	 * 
-	 * @param lives
-	 */
-	public void setLives(int lives) {
-		this.lives = lives;
 	}
 	
 	/**

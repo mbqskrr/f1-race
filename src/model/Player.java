@@ -12,7 +12,6 @@ public class Player implements Comparable<Player>{
 	private int points;
 	private Player right;
 	private Player left;
-	private int weight;
 	
 	/**
 	 * 

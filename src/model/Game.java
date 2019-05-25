@@ -86,13 +86,13 @@ public class Game implements Serializable, Serialize, IEFile{
 	}
 
 	@Override
-	public void loadTrucks(String path, String sep) {
+	public void loadTrucks(String path, String sep) throws IOException{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void loadCars(String path, String sep) {
+	public void loadCars(String path, String sep) throws IOException{
 		// TODO Auto-generated method stub
 		
 	}

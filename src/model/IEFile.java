@@ -1,6 +1,7 @@
 package model;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * 
@@ -19,14 +20,14 @@ public interface IEFile {
 	 * @param path
 	 * @param sep
 	 */
-	public void loadTrucks(String path, String sep);
+	public void loadTrucks(String path, String sep) throws IOException;
 	
 	/**
 	 * 
 	 * @param path
 	 * @param sep
 	 */
-	public void loadCars(String path, String sep);
+	public void loadCars(String path, String sep) throws IOException;
 	
 	/**
 	 * 

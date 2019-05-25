@@ -10,14 +10,14 @@ import ui.RaceController;
 
 public class PointsThread extends Thread{
 	
-	private RaceController race;
+	//private RaceController race;
 	
 	/**
 	 * 
 	 * @param rc
 	 */
 	public PointsThread(RaceController rc) {
-		race = rc;
+		//race = rc;
 	}
 	
 	/**
