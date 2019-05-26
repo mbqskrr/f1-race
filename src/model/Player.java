@@ -15,8 +15,8 @@ public class Player implements Comparable<Player>{
 	
 	/**
 	 * 
-	 * @param nickName
-	 * @param points
+	 * @param nickName - nombre del jugador
+	 * @param points - puntos que obtuvo el jugador en la partida
 	 */
 	public Player(String nickName, int points) {
 		this.nickName = nickName;
@@ -24,16 +24,16 @@ public class Player implements Comparable<Player>{
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que da el nombre del jugador
+	 * @return - el nombre del jugador
 	 */
 	public String getNickName() {
 		return nickName;
 	}
 	
 	/**
-	 * 
-	 * @param nickName
+	 * Método que modifica el nombre del jugador
+	 * @param nickName 
 	 */
 	public void setNickName(String nickName) {
 		this.nickName = nickName;

@@ -9,7 +9,6 @@ package model;
 public class Car extends Vehicule{
 	
 	private int lives; 
-	private int points;
 	private Car next;
 	private Car prev;
 	
@@ -21,28 +20,11 @@ public class Car extends Vehicule{
 	 * @param width
 	 * @param height
 	 */
-	public Car(int points, int lives, String color, double width, double height) {
+	public Car(int lives, String color, double width, double height) {
 		super(color, width, height);
 		this.lives = lives;
-		this.points = points;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getPoints() {
-		return points;
 	}
 	
-	/**
-	 * 
-	 * @param points
-	 */
-	public void setPoints(int points) {
-		this.points = points;
-	}
-
 	/**
 	 * 
 	 * @return
@@ -128,6 +110,10 @@ public class Car extends Vehicule{
 	}
 
 	public void save() {
+		
+	}
+	
+	public void add(Car car) {
 		
 	}
 
