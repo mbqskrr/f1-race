@@ -8,9 +8,9 @@ package model;
 
 public abstract class Vehicule {
 	
-	private String color;
-	private double width;
-	private double height;
+	protected String color;
+	protected double width;
+	protected double height;
 	
 	/**
 	 * 

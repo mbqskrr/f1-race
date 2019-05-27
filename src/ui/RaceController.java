@@ -1,5 +1,6 @@
 package ui;
 
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -7,16 +8,20 @@ import javafx.fxml.FXML;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import model.Car;
+import model.Game;
 import model.Player;
 import model.Truck;
 import threads.PointsThread;
+import javafx.scene.control.Alert;
 //import javafx.scene.control.Alert;
 //import model.Game;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Clase controladora del archvio (race) fxml y de la vista
@@ -26,7 +31,7 @@ import javafx.scene.control.Tooltip;
 
 public class RaceController {
 	
-	//private Game game;
+	private Game game;
 	private Car car;
 	private Truck truck;
 	private Player player;
@@ -51,15 +56,39 @@ public class RaceController {
 	private Rectangle t2WheelR1;
 	private Rectangle t2WheelR2;
 	@FXML
+	private Pane principal;
+	@FXML
     private Pane lane;
 	@FXML
-	private Button btnPlay;
+    private Pane login;
 	@FXML
 	private Label lblPoints;
 	@FXML
 	private Label lblLifes;
 	@FXML
     private Label lblControl;
+	@FXML
+    private Label lblTimePlayed;
+	@FXML
+    private Label lblInfo;
+    @FXML
+    private Label lblPnts;
+    @FXML
+    private Label lblLfs;
+    @FXML
+    private Label lblTitle;
+    @FXML
+    private Label lblTimeP;
+    @FXML
+    private Label lblPlayer;
+    @FXML
+    private Label lblNickname;
+    @FXML
+    private Label lblName;
+    @FXML
+    private TextField jtNickname;
+    @FXML
+    private Button btnNext;
 	@FXML
 	private Button btnUp;
 	@FXML
@@ -68,6 +97,10 @@ public class RaceController {
 	private Button btnLeft;
 	@FXML
     private Button btnRight;
+	@FXML
+    private Button btnLoad;
+	@FXML
+	private Button btnPlay;
 	private Tooltip ttU;
 	private Tooltip ttD;
 	private Tooltip ttL;
@@ -78,65 +111,57 @@ public class RaceController {
 	 * Método que inicializa la clase
 	 */
 	public void initialize() {
-		//game = new Game();
-		bodyWork = new Rectangle(95, 140);
-		wheelL1 = new Rectangle(12, 25, Color.BLACK);
-		wheelL2 = new Rectangle(12, 25, Color.BLACK);
-		wheelR1 = new Rectangle(12, 25, Color.BLACK);
-		wheelR2 = new Rectangle(12, 25, Color.BLACK);
-		ttU = new Tooltip();
-		ttD = new Tooltip();
-		ttR = new Tooltip();
-		ttL = new Tooltip();
-		ttU.setText("Úsalo para mover el\ncarro hacia arriba");
-		ttD.setText("Úsalo para mover el\ncarro hacia abajo");
-		ttR.setText("Úsalo para mover el\ncarro hacia la derecha");
-		ttL.setText("Úsalo para mover el\ncarro hacia la izquierda");
-		btnUp.setTooltip(ttU);
-		btnDown.setTooltip(ttD);
-		btnLeft.setTooltip(ttL);
-		btnRight.setTooltip(ttR);
-		
+		game = new Game();
+		initializeCar();
+		generateTooltip();
 	}
 	
 	/**
-	 * 
 	 * @param event
 	 */
 	@FXML
 	public void play(ActionEvent event) {
-		Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
-		bodyWork.setFill(randomColor);
-		bodyWork.setLayoutX(253);
-		bodyWork.setLayoutY(520);
-		wheelL1.setLayoutX(241);
-		wheelL1.setLayoutY(529);
-		wheelL2.setLayoutX(242);
-		wheelL2.setLayoutY(629);
-		wheelR1.setLayoutX(348);
-		wheelR1.setLayoutY(529);
-		wheelR2.setLayoutX(348);
-		wheelR2.setLayoutY(629);
-		lane.getChildren().add(bodyWork);
-		lane.getChildren().add(wheelL1);
-		lane.getChildren().add(wheelL2);
-		lane.getChildren().add(wheelR1);
-		lane.getChildren().add(wheelR2);
-		/*generateMidTruck();
-		generateRightTruck();
-		generateLeftTruck();*/
-		PointsThread pt = new PointsThread(this);
-		pt.start();
 		btnPlay.setVisible(false);
+		btnPlay.setDisable(true);
+		btnLoad.setVisible(false);
+		btnLoad.setDisable(true);
+		login.setVisible(true);
+		btnNext.setVisible(true);
+		jtNickname.setVisible(true);
+		lblName.setVisible(true);
+	}
+	
+	@FXML
+    void next(ActionEvent event) {
+		String nickName = null;
+		try {
+				nickName = jtNickname.getText();
+		} catch (NullPointerException e) {
+			Alert msg = new Alert(Alert.AlertType.WARNING);
+			msg.setTitle("¡ERROR!");
+			msg.setHeaderText("No se detectó ningún nickname");
+			msg.setContentText("Digita un nickname para continuar");
+		}
+		lblNickname.setText(" "+nickName);
+		player = new Player(nickName, 0, null);
+		game.addPlayer(player);
 		btnUp.setVisible(true);
 		btnDown.setVisible(true);
 		btnLeft.setVisible(true);
 		btnRight.setVisible(true);
 		lblControl.setVisible(true);
+		login.setVisible(false);
+		btnNext.setVisible(false);
+		btnNext.setDisable(true);
+		jtNickname.setVisible(false);
+		lblName.setVisible(false);
+		generateCar();
+		generateMidTruck();
+		generateLeftTruck();
+		generateRightTruck();
 		move();
 		info();
-		collision(bodyWork, bwTruck, bwTruck1, bwTruck2);
-	}
+    }
 	
 	/**
 	 * 
@@ -251,7 +276,27 @@ public class RaceController {
 		car = new Car(3, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
 		lblLifes.setText(" "+car.getLives());
 		//player = new Player(nickName, points);
-		lblPoints.setText(player.getPoints()+"");
+		//lblPoints.setText(player.getPoints()+"");
+	}
+	
+	public void generateCar() {
+		  Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
+		  bodyWork.setFill(randomColor); 
+		  bodyWork.setLayoutX(253);
+		  bodyWork.setLayoutY(520);
+		  wheelL1.setLayoutX(241); 
+		  wheelL1.setLayoutY(529);
+		  wheelL2.setLayoutX(242);
+		  wheelL2.setLayoutY(629); 
+		  wheelR1.setLayoutX(348);
+		  wheelR1.setLayoutY(529); 
+		  wheelR2.setLayoutX(348);
+		  wheelR2.setLayoutY(629);
+		  lane.getChildren().add(bodyWork); 
+		  lane.getChildren().add(wheelL1);
+		  lane.getChildren().add(wheelL2);
+		  lane.getChildren().add(wheelR1);
+		  lane.getChildren().add(wheelR2);
 	}
 	
 	/**
@@ -357,4 +402,28 @@ public class RaceController {
 		w3.setLayoutY(w3.getLayoutY()+15);
 		w3.setLayoutY(w3.getLayoutY()+15);
 	}
+	
+	public void initializeCar() {
+		bodyWork = new Rectangle(95, 140);
+		wheelL1 = new Rectangle(12, 25, Color.BLACK);
+		wheelL2 = new Rectangle(12, 25, Color.BLACK);
+		wheelR1 = new Rectangle(12, 25, Color.BLACK);
+		wheelR2 = new Rectangle(12, 25, Color.BLACK);
+	}
+	
+	public void generateTooltip() {
+		ttU = new Tooltip();
+		ttD = new Tooltip();
+		ttR = new Tooltip();
+		ttL = new Tooltip();
+		ttU.setText("Úsalo para mover el\ncarro hacia arriba");
+		ttD.setText("Úsalo para mover el\ncarro hacia abajo");
+		ttR.setText("Úsalo para mover el\ncarro hacia la derecha");
+		ttL.setText("Úsalo para mover el\ncarro hacia la izquierda");
+		btnUp.setTooltip(ttU);
+		btnDown.setTooltip(ttD);
+		btnLeft.setTooltip(ttL);
+		btnRight.setTooltip(ttR);
+	}
+	
 }

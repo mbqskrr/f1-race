@@ -10,6 +10,7 @@ public class Player implements Comparable<Player>{
 	
 	private String nickName;
 	private int points;
+	private String timePlayed;
 	private Player right;
 	private Player left;
 	
@@ -17,10 +18,12 @@ public class Player implements Comparable<Player>{
 	 * 
 	 * @param nickName - nombre del jugador
 	 * @param points - puntos que obtuvo el jugador en la partida
+	 * @param timePlayed - tiempo que disputó la partida el jugador
 	 */
-	public Player(String nickName, int points) {
+	public Player(String nickName, int points, String timePlayed) {
 		this.nickName = nickName;
 		this.points = points;
+		this.timePlayed = timePlayed;
 	}
 
 	/**
@@ -55,6 +58,22 @@ public class Player implements Comparable<Player>{
 		this.points = points;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getTimePlayed() {
+		return timePlayed;
+	}
+
+	/**
+	 * 
+	 * @param timePlayed
+	 */
+	public void setTimePlayed(String timePlayed) {
+		this.timePlayed = timePlayed;
+	}
+
 	/**
 	 * 
 	 * @return
@@ -102,7 +121,9 @@ public class Player implements Comparable<Player>{
 
 	@Override
 	public String toString() {
-		return "Player [nickName=" + nickName + ", points=" + points + "]";
+		return "Jugador: Nickname=" + nickName + ", Puntos=" + points+", Tiempo jugado= "+timePlayed;
 	}
+	
+
 	
 }

@@ -15,7 +15,7 @@ public interface ExportFile {
 	public static final String PATH_CARS = "data/carsReport.txt";
 	
 	/**
-	 * Este método exporta los datos de la Truck Player a un archivo de texto
+	 * Este método exporta los datos de la clase Truck a un archivo de texto
 	 * @throws FileNotFoundException
 	 */
 	public void exportTrucksReport() throws FileNotFoundException;

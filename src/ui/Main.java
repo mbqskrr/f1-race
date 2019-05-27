@@ -13,6 +13,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application{
 	
+	private Stage stage;
+	
 	/**
 	 * 
 	 * @param args
@@ -24,12 +26,13 @@ public class Main extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		
+		this.stage = stage;
+		
 		Parent root = FXMLLoader.load(getClass().getResource("race.fxml"));
 		
 		Scene scene = new Scene(root);
-		stage.setTitle("F1 Race");
-		stage.setScene(scene);
-		stage.show();
+		this.stage.setTitle("F1 Race");
+		this.stage.setScene(scene);
+		this.stage.show();
 	}
-
 }

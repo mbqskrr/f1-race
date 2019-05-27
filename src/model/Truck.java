@@ -55,38 +55,55 @@ public class Truck  extends Vehicule{
 
 	@Override
 	public String getColor() {
-		// TODO Auto-generated method stub
 		return super.getColor();
 	}
 
 	@Override
 	public void setColor(String color) {
-		// TODO Auto-generated method stub
 		super.setColor(color);
 	}
 
 	@Override
 	public double getWidth() {
-		// TODO Auto-generated method stub
 		return super.getWidth();
 	}
 
 	@Override
 	public void setWidth(double width) {
-		// TODO Auto-generated method stub
 		super.setWidth(width);
 	}
 
 	@Override
 	public double getHeight() {
-		// TODO Auto-generated method stub
 		return super.getHeight();
 	}
 
 	@Override
 	public void setHeight(double height) {
-		// TODO Auto-generated method stub
 		super.setHeight(height);
 	}
 
+	/*@Override
+	public int compareTo(Truck truck) {
+		int comparation;
+		if (this.color.compareToIgnoreCase(truck.color) > 0) {
+			comparation = 1;
+		} else if(this.color.compareToIgnoreCase(truck.color) < 0){
+			comparation = -1;
+		}else {
+			comparation = 0;
+		}
+		return comparation;
+	}*/
+
+	public int getSize() {
+		Truck actual = this;
+		int size = 0;
+		while (actual!=null) {
+			size++;
+			actual = actual.getNext();
+		}
+		return size;
+	}
+	
 }
