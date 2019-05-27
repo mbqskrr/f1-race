@@ -7,9 +7,9 @@ package exception;
  */
 
 @SuppressWarnings("serial")
-public class RepeatedNickNameExcpetion extends Exception{
+public class NickNameExcpetion extends Exception{
 	
-	public RepeatedNickNameExcpetion(String message) {
+	public NickNameExcpetion(String message) {
 		super(message);
 	}
 	

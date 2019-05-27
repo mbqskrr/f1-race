@@ -4,28 +4,25 @@ package ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import exception.NickNameExcpetion;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import model.Car;
 import model.Game;
 import model.Player;
 import model.Truck;
 import threads.ExecutionTimeThread;
+import threads.GUIControlThread;
 import threads.PointsThread;
-import javafx.scene.control.Alert;
-//import javafx.scene.control.Alert;
-//import model.Game;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.Alert.AlertType;
 
 /**
  * Clase controladora del archvio (race) fxml y de la vista
@@ -105,10 +102,16 @@ public class RaceController {
     private Button btnLoad;
 	@FXML
 	private Button btnPlay;
+	@FXML
+	private Button btnSave;
+    @FXML
+    private Button btnReset;
 	private Tooltip ttU;
 	private Tooltip ttD;
 	private Tooltip ttL;
 	private Tooltip ttR;
+	private boolean collisioned;
+	private ExecutionTimeThread ett;
 	
 	
 	/**
@@ -118,6 +121,7 @@ public class RaceController {
 		game = new Game();
 		initializeCar();
 		generateTooltip();
+		collisioned = false;
 	}
 	
 	/**
@@ -141,48 +145,44 @@ public class RaceController {
 	 */
 	@FXML
     void next(ActionEvent event) {
-		String nickName = null;
+		String nickName = jtNickname.getText();
 		try {
-				nickName = jtNickname.getText();
-		} catch (NullPointerException e) {
-			Alert msg = new Alert(Alert.AlertType.WARNING);
-			msg.setTitle("¡ERROR!");
-			msg.setHeaderText("No se detectó ningún nickname");
-			msg.setContentText("Digita un nickname para continuar");
+			game.validateNickname(nickName);
+			lblNickname.setText(" "+nickName);
+			player = new Player(nickName, 0, null);
+			game.addPlayer(player);
+			try {
+				game.save();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			visibilityForNext();
+			generateCar();
+			generateMidTruck();
+			generateLeftTruck();
+			generateRightTruck();
+			move();
+			info();
+			collision();
+			ett = new ExecutionTimeThread(this);
+			ett.setDaemon(true);
+			ett.start();
+			lblTimePlayed.setText(" "+ett.getMinutes()+":"+ett.getSeconds());
+			PointsThread pt = new PointsThread();
+			pt.setDaemon(true);
+			pt.start();
+			//pt.interrupt();
+			/*GUIControlThread gut = new GUIControlThread(this);
+			gut.setDaemon(true);
+			gut.start();*/
+			lblPoints.setText(" "+pt.getPoints());
+			jtNickname.setText(null);
+		} catch (NickNameExcpetion e1) {
+			e1.printStackTrace();
 		}
-		lblNickname.setText(" "+nickName);
-		player = new Player(nickName, 0, null);
-		game.addPlayer(player);
-		try {
-			game.save();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		btnUp.setVisible(true);
-		btnDown.setVisible(true);
-		btnLeft.setVisible(true);
-		btnRight.setVisible(true);
-		lblControl.setVisible(true);
-		login.setVisible(false);
-		btnNext.setVisible(false);
-		btnNext.setDisable(true);
-		jtNickname.setVisible(false);
-		lblName.setVisible(false);
-		generateCar();
-		generateMidTruck();
-		generateLeftTruck();
-		generateRightTruck();
-		move();
-		info();
-		ExecutionTimeThread ett = new ExecutionTimeThread(this);
-		ett.start();
-		lblTimePlayed.setText(" "+ett.getMinutes()+":"+ett.getSeconds());
-		PointsThread pt = new PointsThread();
-		pt.start();
-		lblPoints.setText(" "+pt.getPoints());
-    
+		
 	}
 	/**
 	 * 
@@ -198,6 +198,30 @@ public class RaceController {
 			e.printStackTrace();
 		}
     }
+	
+	/**
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void reset(ActionEvent event) {
+		login.setVisible(true);
+		btnNext.setVisible(true);
+		btnNext.setDisable(false);
+		jtNickname.setVisible(true);
+		lblName.setVisible(true);
+		collisioned = true;
+		collision();
+	}
+
+	/**
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void save(ActionEvent event) {
+		
+	}
 	
 	/**
 	 * 
@@ -421,19 +445,14 @@ public class RaceController {
 		truck = new Truck(bwTruck2.getFill().toString(), bwTruck2.getWidth(), bwTruck2.getHeight());
 	}
 	
-	private boolean collision(Rectangle r, Rectangle r1, Rectangle r2, Rectangle r3) {
-		boolean collide = false;
-		if (r.getLayoutX()==r1.getLayoutX() || r.getLayoutX()==r2.getLayoutX() || r.getLayoutX()==r3.getLayoutX()) {
-			collide = true;
-			lane.setVisible(false);
-		} else {
-
-		}
-		return collide;
-	}
-	
-	public boolean clash() {
-		return collision(bodyWork, bwTruck, bwTruck1, bwTruck2);
+	public void collision(/*Rectangle r, Rectangle r1, Rectangle r2, Rectangle r3*/) {
+		btnReset.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				collisioned = true;
+				ett.interrupt();
+			}
+		});
 	}
 	
 	private void moveTruck(Rectangle bw, Rectangle w, Rectangle w1, Rectangle w2, Rectangle w3) {
@@ -471,6 +490,33 @@ public class RaceController {
 		moveTruck(bwTruck, tWheelL1, tWheelL2, tWheelR1, tWheelR2);
 		moveTruck(bwTruck1, t1WheelL1, t1WheelL2, t1WheelR1, t1WheelR2);
 		moveTruck(bwTruck2, t2WheelL1, t2WheelL2, t2WheelR1, t2WheelR2);
+	}
+
+	public Label getLblTimePlayed() {
+		return lblTimePlayed;
+	}
+
+	public boolean isCollisioned() {
+		return collisioned;
+	}
+
+	public void setCollisioned(boolean collisioned) {
+		this.collisioned = collisioned;
+	}
+
+	public void visibilityForNext() {
+		btnUp.setVisible(true);
+		btnDown.setVisible(true);
+		btnLeft.setVisible(true);
+		btnRight.setVisible(true);
+		lblControl.setVisible(true);
+		login.setVisible(false);
+		btnNext.setVisible(false);
+		btnNext.setDisable(true);
+		jtNickname.setVisible(false);
+		lblName.setVisible(false);
+		btnSave.setVisible(true);
+		btnReset.setVisible(true);
 	}
 	
 }

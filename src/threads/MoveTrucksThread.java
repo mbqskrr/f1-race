@@ -11,7 +11,9 @@ public class MoveTrucksThread extends Thread{
 	}
 	
 	public void run() {
-		raceC.moveTruck();
+		while (raceC.isCollisioned() == false) {
+			raceC.moveTruck();
+		}
 	}
 
 }

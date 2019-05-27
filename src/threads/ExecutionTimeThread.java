@@ -13,7 +13,7 @@ public class ExecutionTimeThread extends Thread{
 	}
 	
 	public void run() {
-		while (raceC.clash() == false) {
+		while (raceC.isCollisioned() == false) {
 			for (minutes = 0; minutes < 60; minutes++) {
 				for (seconds = 0; seconds < 60; seconds++) {
 					System.out.println(minutes+":"+seconds);

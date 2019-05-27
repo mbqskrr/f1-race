@@ -10,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.NickNameExcpetion;
+
 /**
  * Clase principal del modelo del mundo
  * @author Manuel Balanta
@@ -93,6 +95,7 @@ public class Game implements Serialize, ExportFile{
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(myFile));
 			root = (Player)ois.readObject();
 			ois.close();
+			System.out.println(root+" auuuuuu");
 		}
 	}
 
@@ -245,6 +248,12 @@ public class Game implements Serialize, ExportFile{
 					}
 				}				
 			}
+		}
+	}
+	
+	public void validateNickname(String nn) throws NickNameExcpetion{
+		if (nn.equals("") || nn == null || nn.equals(" ")) {
+			throw new NickNameExcpetion("El nickname no es valido");
 		}
 	}
 }

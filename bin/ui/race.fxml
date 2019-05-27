@@ -58,5 +58,15 @@
             <Button fx:id="btnNext" layoutX="92.0" layoutY="159.0" mnemonicParsing="false" onAction="#next" text="Siguiente" visible="false" />
          </children>
       </Pane>
+      <Button fx:id="btnSave" layoutX="645.0" layoutY="457.0" mnemonicParsing="false" onAction="#save" text="SAVE" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnReset" layoutX="704.0" layoutY="457.0" mnemonicParsing="false" onAction="#reset" text="RESET" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
