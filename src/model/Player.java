@@ -1,13 +1,19 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Manuel Balanta
  *
  */
 
-public class Player implements Comparable<Player>{
+public class Player implements Comparable<Player>, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nickName;
 	private int points;
 	private String timePlayed;

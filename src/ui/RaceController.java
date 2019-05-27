@@ -1,6 +1,7 @@
 package ui;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -152,6 +153,13 @@ public class RaceController {
 		lblNickname.setText(" "+nickName);
 		player = new Player(nickName, 0, null);
 		game.addPlayer(player);
+		try {
+			game.save();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnUp.setVisible(true);
 		btnDown.setVisible(true);
 		btnLeft.setVisible(true);
@@ -170,10 +178,12 @@ public class RaceController {
 		info();
 		ExecutionTimeThread ett = new ExecutionTimeThread(this);
 		ett.start();
+		lblTimePlayed.setText(" "+ett.getMinutes()+":"+ett.getSeconds());
 		PointsThread pt = new PointsThread();
 		pt.start();
-    }
-	
+		lblPoints.setText(" "+pt.getPoints());
+    
+	}
 	/**
 	 * 
 	 * @param event
@@ -426,11 +436,11 @@ public class RaceController {
 		return collision(bodyWork, bwTruck, bwTruck1, bwTruck2);
 	}
 	
-	public void moveTruck(Rectangle bw, Rectangle w, Rectangle w1, Rectangle w2, Rectangle w3) {
+	private void moveTruck(Rectangle bw, Rectangle w, Rectangle w1, Rectangle w2, Rectangle w3) {
 		bw.setLayoutY(bw.getLayoutY()+15);
 		w.setLayoutY(w.getLayoutY()+15);
 		w1.setLayoutY(w1.getLayoutY()+15);
-		w3.setLayoutY(w3.getLayoutY()+15);
+		w2.setLayoutY(w2.getLayoutY()+15);
 		w3.setLayoutY(w3.getLayoutY()+15);
 	}
 	
@@ -457,8 +467,10 @@ public class RaceController {
 		btnRight.setTooltip(ttR);
 	}
 	
-	public void moveT() {
-		bwTruck.setLayoutY(bwTruck.getLayoutY()+2);
+	public void moveTruck() {
+		moveTruck(bwTruck, tWheelL1, tWheelL2, tWheelR1, tWheelR2);
+		moveTruck(bwTruck1, t1WheelL1, t1WheelL2, t1WheelR1, t1WheelR2);
+		moveTruck(bwTruck2, t2WheelL1, t2WheelL2, t2WheelR1, t2WheelR2);
 	}
 	
 }

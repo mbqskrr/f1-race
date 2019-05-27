@@ -28,7 +28,7 @@ public class PointsThread extends Thread{
 		int minutes, seconds;
 		for (minutes = 0; minutes < 60; minutes++) {
 			for (seconds = 0; seconds < 60; seconds++) {
-				if (seconds%5==0) {
+				if (seconds>4 && seconds%5==0) {
 					points++;
 					System.out.println("Puntos: "+points);
 				}

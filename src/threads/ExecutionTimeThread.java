@@ -17,7 +17,7 @@ public class ExecutionTimeThread extends Thread{
 			for (minutes = 0; minutes < 60; minutes++) {
 				for (seconds = 0; seconds < 60; seconds++) {
 					System.out.println(minutes+":"+seconds);
-					raceC.moveT();
+					raceC.moveTruck();
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
