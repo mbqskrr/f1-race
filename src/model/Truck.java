@@ -105,5 +105,6 @@ public class Truck  extends Vehicule{
 		}
 		return size;
 	}
+
 	
 }

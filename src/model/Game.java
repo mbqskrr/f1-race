@@ -108,7 +108,7 @@ public class Game implements Serializable, Serialize, ExportFile{
 	
 	/**
 	 * Este método permite conocer cuántos nodos tiene el ABB
-	 * @param p objeto de la clase player
+	 * @param p objeto de la clase Player
 	 * @return el número de nodos que tiene el ABB
 	 */
 	public int getWeight(Player p) {
@@ -158,24 +158,26 @@ public class Game implements Serializable, Serialize, ExportFile{
 	public void addTruck(Truck truck) {
 		if (firstT == null) {
 			firstT = truck;
+			truck.setPrev(truck);
+			truck.setNext(truck);
 		} else {
-			Truck aux = firstT;
-			while (aux.getNext() != null) {
-				aux = aux.getNext();
-			}
-			aux.setNext(truck);
+			firstT.getPrev().setNext(truck);
+			truck.setPrev(firstT.getPrev());
+			truck.setNext(firstT);
+			firstT.setPrev(truck);
 		}
 	}
 	
 	public void addCar(Car car) {
 		if (first == null) {
 			first = car;
+			car.setPrev(car);
+			car.setNext(car);
 		} else {
-			Car aux = first;
-			while (aux.getNext() != null) {
-				aux = aux.getNext();
-			}
-			aux.setNext(car);
+			first.getPrev().setNext(car);
+			car.setPrev(first.getPrev());
+			car.setNext(first);
+			first.setPrev(car);
 		}
 	}
 	
@@ -216,5 +218,37 @@ public class Game implements Serializable, Serialize, ExportFile{
 			playersSorted.add(root);
 		}
 		return playersSorted;
+	}
+	
+	public void bubbleSort() {
+		if(first != null) {
+			
+			boolean sorted = true;
+			while(sorted) {
+				Car current = first;
+				sorted = false;
+				while(current.getNext() != first) {
+					Car next = current.getNext();
+					if(current.compareTo(next)>0) {
+						if(current.getPrev()!=null) {
+							current.getPrev().setNext(next);
+						}
+						if(next.getNext()!=null) {
+							next.getNext().setPrev(current);
+						}
+						current.setNext(next.getNext());
+						next.setPrev(current.getPrev());
+						current.setPrev(next);
+						next.setNext(current);
+						if(current==first) {
+							first = next;
+						}
+						sorted = true;
+					}else{
+						current = current.getNext();
+					}
+				}				
+			}
+		}
 	}
 }

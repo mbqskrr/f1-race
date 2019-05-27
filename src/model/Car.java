@@ -6,7 +6,7 @@ package model;
  *
  */
 
-public class Car extends Vehicule{
+public class Car extends Vehicule implements Comparable<Car>{
 	
 	private int lives; 
 	private Car next;
@@ -75,46 +75,45 @@ public class Car extends Vehicule{
 	
 	@Override
 	public String getColor() {
-		// TODO Auto-generated method stub
 		return super.getColor();
 	}
 
 	@Override
 	public void setColor(String color) {
-		// TODO Auto-generated method stub
 		super.setColor(color);
 	}
 
 	@Override
 	public double getWidth() {
-		// TODO Auto-generated method stub
 		return super.getWidth();
 	}
 
 	@Override
 	public void setWidth(double width) {
-		// TODO Auto-generated method stub
 		super.setWidth(width);
 	}
 
 	@Override
 	public double getHeight() {
-		// TODO Auto-generated method stub
 		return super.getHeight();
 	}
 
 	@Override
 	public void setHeight(double height) {
-		// TODO Auto-generated method stub
 		super.setHeight(height);
 	}
 
-	public void save() {
-		
-	}
-	
-	public void add(Car car) {
-		
+	@Override
+	public int compareTo(Car car) {
+		int comparation;
+		if (this.color.compareToIgnoreCase(car.color) > 0) {
+			comparation = 1;
+		} else if(this.color.compareToIgnoreCase(car.color) < 0){
+			comparation = -1;
+		}else {
+			comparation = 0;
+		}
+		return comparation;
 	}
 
 }

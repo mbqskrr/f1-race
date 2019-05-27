@@ -1,6 +1,8 @@
 package ui;
 
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -11,6 +13,7 @@ import model.Car;
 import model.Game;
 import model.Player;
 import model.Truck;
+import threads.ExecutionTimeThread;
 import threads.PointsThread;
 import javafx.scene.control.Alert;
 //import javafx.scene.control.Alert;
@@ -131,6 +134,10 @@ public class RaceController {
 		lblName.setVisible(true);
 	}
 	
+	/**
+	 * 
+	 * @param event
+	 */
 	@FXML
     void next(ActionEvent event) {
 		String nickName = null;
@@ -161,6 +168,25 @@ public class RaceController {
 		generateRightTruck();
 		move();
 		info();
+		ExecutionTimeThread ett = new ExecutionTimeThread(this);
+		ett.start();
+		PointsThread pt = new PointsThread();
+		pt.start();
+    }
+	
+	/**
+	 * 
+	 * @param event
+	 */
+	@FXML
+    void load(ActionEvent event) {
+		try {
+			game.load();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 	
 	/**
@@ -275,8 +301,7 @@ public class RaceController {
 	private void info() {
 		car = new Car(3, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
 		lblLifes.setText(" "+car.getLives());
-		//player = new Player(nickName, points);
-		//lblPoints.setText(player.getPoints()+"");
+		game.addCar(car);
 	}
 	
 	public void generateCar() {
@@ -386,13 +411,19 @@ public class RaceController {
 		truck = new Truck(bwTruck2.getFill().toString(), bwTruck2.getWidth(), bwTruck2.getHeight());
 	}
 	
-	public void collision(Rectangle r, Rectangle r1, Rectangle r2, Rectangle r3) {
-		Shape sc = Shape.intersect(r, r1);
-		boolean emptyCollide = sc.getBoundsInLocal().isEmpty();
-		if (emptyCollide == false) {
-			wheelL1.setFill(Color.WHITE);
-			System.exit(0);
+	private boolean collision(Rectangle r, Rectangle r1, Rectangle r2, Rectangle r3) {
+		boolean collide = false;
+		if (r.getLayoutX()==r1.getLayoutX() || r.getLayoutX()==r2.getLayoutX() || r.getLayoutX()==r3.getLayoutX()) {
+			collide = true;
+			lane.setVisible(false);
+		} else {
+
 		}
+		return collide;
+	}
+	
+	public boolean clash() {
+		return collision(bodyWork, bwTruck, bwTruck1, bwTruck2);
 	}
 	
 	public void moveTruck(Rectangle bw, Rectangle w, Rectangle w1, Rectangle w2, Rectangle w3) {
@@ -424,6 +455,10 @@ public class RaceController {
 		btnDown.setTooltip(ttD);
 		btnLeft.setTooltip(ttL);
 		btnRight.setTooltip(ttR);
+	}
+	
+	public void moveT() {
+		bwTruck.setLayoutY(bwTruck.getLayoutY()+2);
 	}
 	
 }

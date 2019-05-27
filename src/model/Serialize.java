@@ -14,7 +14,7 @@ public interface Serialize {
 	public static final String FILE = "data/persistence.txt";
 	
 	/**
-	 * Este método permite deserializar un archivo en bytes
+	 * Este método permite deserializar un archivo de bytes
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
