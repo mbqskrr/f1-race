@@ -1,11 +1,11 @@
 package threads;
 
-import javafx.application.Platform;
-import ui.RaceController;
+//import javafx.application.Platform;
+//import ui.RaceController;
 
 public class GUIControlThread extends Thread{
 	
-	private RaceController raceC;
+	/*private RaceController raceC;
 
 	public GUIControlThread(RaceController raceC) {
 		this.raceC = raceC;
@@ -23,6 +23,6 @@ public class GUIControlThread extends Thread{
 			}
 		}
 		
-	}
+	}*/
 
 }

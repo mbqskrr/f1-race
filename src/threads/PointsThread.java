@@ -1,9 +1,7 @@
 package threads;
 
-//import ui.RaceController;
-
 /**
- * 
+ * Esta clase permite llevar los puntos del juego
  * @author Manuel Balanta
  *
  */
@@ -14,15 +12,14 @@ public class PointsThread extends Thread{
 	private int points;
 	
 	/**
-	 * 
-	 * @param rc
+	 * Consturctor de la clase
 	 */
 	public PointsThread() {
 		
 	}
 	
 	/**
-	 * 
+	 * Método encargado de la ejecución
 	 */
 	public void run() {
 		int minutes, seconds;
@@ -40,7 +37,11 @@ public class PointsThread extends Thread{
 			}
 		}
 	}
-
+	
+	/**
+	 * Método que da los puntos 
+	 * @return - puntos obtenidos en el juego
+	 */
 	public int getPoints() {
 		return points;
 	}

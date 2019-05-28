@@ -1,7 +1,7 @@
 package model;
 
 /**
- * 
+ * Clase padre de Car y Truck
  * @author Manuel Balanta
  *
  */

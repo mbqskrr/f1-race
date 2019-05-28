@@ -3,7 +3,6 @@ package ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import exception.NickNameExcpetion;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -15,7 +14,7 @@ import model.Game;
 import model.Player;
 import model.Truck;
 import threads.ExecutionTimeThread;
-import threads.GUIControlThread;
+//import threads.GUIControlThread;
 import threads.PointsThread;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -34,7 +33,7 @@ public class RaceController {
 	
 	private Game game;
 	private Car car;
-	private Truck truck;
+	//private Truck truck;
 	private Player player;
 	private Rectangle bodyWork; 
 	private Rectangle wheelL1;
@@ -112,7 +111,7 @@ public class RaceController {
 	private Tooltip ttR;
 	private boolean collisioned;
 	private ExecutionTimeThread ett;
-	
+	private PointsThread pt;
 	
 	/**
 	 * Método que inicializa la clase
@@ -125,6 +124,7 @@ public class RaceController {
 	}
 	
 	/**
+	 * Método para comenzar la partida y realizar el logeo del jugador
 	 * @param event
 	 */
 	@FXML
@@ -140,7 +140,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * 
+	 * Método principal para dar inicio a la partida, después de haberse logeado el jugador
 	 * @param event
 	 */
 	@FXML
@@ -164,13 +164,14 @@ public class RaceController {
 			generateLeftTruck();
 			generateRightTruck();
 			move();
+			moveKey();
 			info();
 			collision();
 			ett = new ExecutionTimeThread(this);
 			ett.setDaemon(true);
 			ett.start();
 			lblTimePlayed.setText(" "+ett.getMinutes()+":"+ett.getSeconds());
-			PointsThread pt = new PointsThread();
+			pt = new PointsThread();
 			pt.setDaemon(true);
 			pt.start();
 			//pt.interrupt();
@@ -185,13 +186,14 @@ public class RaceController {
 		
 	}
 	/**
-	 * 
+	 * Método para cargar una partida con un archivo de texto y deserialización
 	 * @param event
 	 */
 	@FXML
     void load(ActionEvent event) {
 		try {
 			game.load();
+			game.importReport(Game.PATH, ",");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -200,31 +202,60 @@ public class RaceController {
     }
 	
 	/**
-	 * 
+	 * Método para resetear la partida
 	 * @param event
 	 */
 	@FXML
 	void reset(ActionEvent event) {
-		login.setVisible(true);
-		btnNext.setVisible(true);
-		btnNext.setDisable(false);
-		jtNickname.setVisible(true);
-		lblName.setVisible(true);
-		collisioned = true;
-		collision();
+		try {
+			login.setVisible(true);
+			btnNext.setVisible(true);
+			btnNext.setDisable(false);
+			jtNickname.setVisible(true);
+			lblName.setVisible(true);
+			collision();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
-	 * 
+	 * Método para guardar una partida
 	 * @param event
 	 */
 	@FXML
 	void save(ActionEvent event) {
-		
+		int points = pt.getPoints();
+		int min = ett.getMinutes();
+		int sec = ett.getSeconds();
+		Player p = new Player(lblNickname.getText(), points, min+":"+sec);
+		game.addPlayer(p);
+		int l = Integer.parseInt(lblLifes.getText());
+		Car c = new Car(l, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
+		game.addCar(c);
+		Truck t = new Truck(bwTruck.getFill().toString(), bwTruck.getWidth(), bwTruck.getHeight());
+		game.addTruck(t);
+		Truck t1 = new Truck(bwTruck1.getFill().toString(), bwTruck1.getWidth(), bwTruck1.getHeight());
+		game.addTruck(t1);
+		Truck t2 = new Truck(bwTruck2.getFill().toString(), bwTruck2.getWidth(), bwTruck2.getHeight());
+		game.addTruck(t2);
+		try {
+			game.save();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			game.exportReport();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
-	 * 
+	 * Método público que contiene todos los movimientos del carro
 	 */
 	public void move() {
 		moveUp();
@@ -234,7 +265,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * 
+	 * Método para mover el carro hacia arriba
 	 */
 	private void moveUp() {
 		btnUp.setOnMouseClicked(new EventHandler<Event>() {
@@ -259,7 +290,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * 
+	 * Método para mover el carro hacia abajo
 	 */
 	private void moveDown() {
 		btnDown.setOnMouseClicked(new EventHandler<Event>() {
@@ -284,7 +315,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * 
+	 * Método para mover el carro hacia la derecha
 	 */
 	private void moveRight() {
 		btnRight.setOnMouseClicked(new EventHandler<Event>() {
@@ -308,7 +339,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * 
+	 * Método para mover el carro hacia la izquierda
 	 */
 	private void moveLeft() {
 		btnLeft.setOnMouseClicked(new EventHandler<Event>() {
@@ -334,10 +365,14 @@ public class RaceController {
 	
 	private void info() {
 		car = new Car(3, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
-		lblLifes.setText(" "+car.getLives());
+		String lifes = String.valueOf(car.getLives());
+		lblLifes.setText(lifes);
 		game.addCar(car);
 	}
 	
+	/**
+	 * Método que genera el carro principal
+	 */
 	public void generateCar() {
 		  Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
 		  bodyWork.setFill(randomColor); 
@@ -359,7 +394,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * 
+	 * Método que genera el carro enemigo del carril central
 	 */
 	public void generateMidTruck() {
 		bwTruck = new Rectangle(95, 140); 
@@ -384,11 +419,11 @@ public class RaceController {
 		lane.getChildren().add(tWheelL2);
 		lane.getChildren().add(tWheelR1);
 		lane.getChildren().add(tWheelR2);
-		truck = new Truck(bwTruck.getFill().toString(), bwTruck.getWidth(), bwTruck.getHeight());
+		//truck = new Truck(bwTruck.getFill().toString(), bwTruck.getWidth(), bwTruck.getHeight());
 	}
 	
 	/**
-	 * 
+	 * Método que genera el carro enemigo del carril derecho
 	 */
 	public void generateRightTruck() {
 		bwTruck1 = new Rectangle(95, 140); 
@@ -413,11 +448,11 @@ public class RaceController {
 		lane.getChildren().add(t1WheelL2);
 		lane.getChildren().add(t1WheelR1);
 		lane.getChildren().add(t1WheelR2);
-		truck = new Truck(bwTruck1.getFill().toString(), bwTruck1.getWidth(), bwTruck1.getHeight());
+		//truck = new Truck(bwTruck1.getFill().toString(), bwTruck1.getWidth(), bwTruck1.getHeight());
 	} 
 	
 	/**
-	 * 
+	 * Método que genera el carro enemigo del carril izquierdo
 	 */
 	public void generateLeftTruck() {
 		bwTruck2 = new Rectangle(95, 140); 
@@ -442,19 +477,36 @@ public class RaceController {
 		lane.getChildren().add(t2WheelL2);
 		lane.getChildren().add(t2WheelR1);
 		lane.getChildren().add(t2WheelR2);
-		truck = new Truck(bwTruck2.getFill().toString(), bwTruck2.getWidth(), bwTruck2.getHeight());
+		//truck = new Truck(bwTruck2.getFill().toString(), bwTruck2.getWidth(), bwTruck2.getHeight());
 	}
 	
+	/**
+	 * 
+	 */
 	public void collision(/*Rectangle r, Rectangle r1, Rectangle r2, Rectangle r3*/) {
-		btnReset.setOnMouseClicked(new EventHandler<Event>() {
+		/*btnReset.setOnMouseClicked(new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
 				collisioned = true;
-				ett.interrupt();
 			}
+		});*/
+		if (bodyWork.getBoundsInParent().intersects(bwTruck.getBoundsInParent())) {
+			collisioned = true;
+		}
+		lane.getChildren().removeIf(n ->{
+			RaceController rc = new RaceController();
+			return rc.collisioned;
 		});
 	}
 	
+	/**
+	 * Método privado que permite el movimiento del carro enemigo
+	 * @param bw - la carrocería ó cuerpo del carro
+	 * @param w - primera rueda del carro
+	 * @param w1 - segunda rueda del carro
+	 * @param w2 - tercera rueda del carro
+	 * @param w3 - cuarta rueda del carro
+	 */
 	private void moveTruck(Rectangle bw, Rectangle w, Rectangle w1, Rectangle w2, Rectangle w3) {
 		bw.setLayoutY(bw.getLayoutY()+15);
 		w.setLayoutY(w.getLayoutY()+15);
@@ -463,6 +515,9 @@ public class RaceController {
 		w3.setLayoutY(w3.getLayoutY()+15);
 	}
 	
+	/**
+	 * Método para inicializar el carro
+	 */
 	public void initializeCar() {
 		bodyWork = new Rectangle(95, 140);
 		wheelL1 = new Rectangle(12, 25, Color.BLACK);
@@ -471,6 +526,9 @@ public class RaceController {
 		wheelR2 = new Rectangle(12, 25, Color.BLACK);
 	}
 	
+	/**
+	 * Método para generar los Tooltip de los botones que permited mover e carro
+	 */
 	public void generateTooltip() {
 		ttU = new Tooltip();
 		ttD = new Tooltip();
@@ -486,24 +544,30 @@ public class RaceController {
 		btnRight.setTooltip(ttR);
 	}
 	
+	/**
+	 * Método público para mover los 4 enemigos
+	 */
 	public void moveTruck() {
 		moveTruck(bwTruck, tWheelL1, tWheelL2, tWheelR1, tWheelR2);
 		moveTruck(bwTruck1, t1WheelL1, t1WheelL2, t1WheelR1, t1WheelR2);
 		moveTruck(bwTruck2, t2WheelL1, t2WheelL2, t2WheelR1, t2WheelR2);
 	}
 
-	public Label getLblTimePlayed() {
+	/*public Label getLblTimePlayed() {
 		return lblTimePlayed;
-	}
+	}*/
 
+	/**
+	 * Método que da el valor de la variable collisioned
+	 * @return - el valor de collisioned
+	 */
 	public boolean isCollisioned() {
 		return collisioned;
 	}
 
-	public void setCollisioned(boolean collisioned) {
-		this.collisioned = collisioned;
-	}
-
+	/**
+	 * Método para ocultar y mostrar ciertos elementos para el evento del botón next
+	 */
 	public void visibilityForNext() {
 		btnUp.setVisible(true);
 		btnDown.setVisible(true);
@@ -517,6 +581,29 @@ public class RaceController {
 		lblName.setVisible(false);
 		btnSave.setVisible(true);
 		btnReset.setVisible(true);
+	}
+	
+	public void moveKey() {
+		lane.setOnKeyPressed(e -> {
+			RaceController rc = new RaceController();
+			switch (e.getCode()) {
+			case W:
+				rc.moveUp();
+				break;
+			case S:
+				rc.moveDown();
+				break;
+			case A:
+				rc.moveLeft();
+				break;
+			case D:
+				rc.moveRight();
+				break;
+			default:
+				break;
+			}
+		}
+		);
 	}
 	
 }

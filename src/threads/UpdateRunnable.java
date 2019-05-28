@@ -1,10 +1,10 @@
 package threads;
 
-import ui.RaceController;
+//import ui.RaceController;
 
-public class UpdateRunnable implements Runnable{
+public class UpdateRunnable /*implements Runnable*/{
 	
-	private RaceController raceC;
+	/*private RaceController raceC;
 		
 	public UpdateRunnable(RaceController raceC) {
 		super();
@@ -17,7 +17,7 @@ public class UpdateRunnable implements Runnable{
 		for (minutes = 0; minutes < 60; minutes++) {
 			for (seconds = 0; seconds < 60; seconds++) {
 				System.out.println(minutes+":"+seconds);
-				raceC.getLblTimePlayed().setText(minutes+":"+seconds);
+				//raceC.getLblTimePlayed().setText(minutes+":"+seconds);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -26,6 +26,6 @@ public class UpdateRunnable implements Runnable{
 				}
 			}
 		}
-	}
+	}*/
 
 }

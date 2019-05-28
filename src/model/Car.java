@@ -14,11 +14,10 @@ public class Car extends Vehicule implements Comparable<Car>{
 	
 	/**
 	 * Método constructor de la clase Player
-	 * @param points
-	 * @param lives
-	 * @param color
-	 * @param width
-	 * @param height
+	 * @param lives - vidas del carro
+	 * @param color - color del carro 
+	 * @param width - ancho del carro
+	 * @param height - alto del carro
 	 */
 	public Car(int lives, String color, double width, double height) {
 		super(color, width, height);

@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * 
+ * Clase principal de la vista
  * @author Manuel Balanta
  *
  */
@@ -16,7 +16,7 @@ public class Main extends Application{
 	private Stage stage;
 	
 	/**
-	 * 
+	 * Método main
 	 * @param args
 	 */
 	public static void main(String[] args) {
