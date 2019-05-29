@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import exception.NickNameExcpetion;
+import exception.NotFoundException;
 
 class GameTest {
 	
@@ -115,9 +116,18 @@ class GameTest {
 			game.validateNickname(" ");
 			fail("Error al lanzar la excepción");
 		} catch (NickNameExcpetion e) {
-			//assertThat(e.getMessage(), );
+			e.printStackTrace();
 		}
 	}
 
-	
+	@org.junit.jupiter.api.Test
+	void searchPlayerTest() {
+		setUpSceary1();
+		try {
+			game.searchPlayer(game.getRoot().getRight());
+			fail("NotFoundException esperada por lanzar");
+		} catch (NotFoundException e) {
+			//e.printStackTrace();
+		}
+	}
 }
