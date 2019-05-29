@@ -8,13 +8,12 @@ import java.io.Serializable;
  *
  */
 
-public class Player implements Comparable<Player>, Serializable{
+public class Player extends Person implements Comparable<Player>, Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String nickName;
 	private int points;
 	private String timePlayed;
 	private Player right;
@@ -27,26 +26,14 @@ public class Player implements Comparable<Player>, Serializable{
 	 * @param timePlayed - tiempo que disputó la partida el jugador
 	 */
 	public Player(String nickName, int points, String timePlayed) {
-		this.nickName = nickName;
+		super(nickName);
 		this.points = points;
 		this.timePlayed = timePlayed;
 	}
 
-	/**
-	 * Método que da el nombre del jugador
-	 * @return - el nombre del jugador
-	 */
-	public String getNickName() {
-		return nickName;
-	}
+
 	
-	/**
-	 * Método que modifica el nombre del jugador
-	 * @param nickName 
-	 */
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
+
 
 	/**
 	 * 
@@ -115,9 +102,9 @@ public class Player implements Comparable<Player>, Serializable{
 	@Override
 	public int compareTo(Player player) {
 		int comparation;
-		if (this.nickName.compareToIgnoreCase(player.nickName) > 0) {
+		if (this.name.compareToIgnoreCase(player.name) > 0) {
 			comparation = 1;
-		} else if(this.nickName.compareToIgnoreCase(player.nickName) < 0){
+		} else if(this.name.compareToIgnoreCase(player.name) < 0){
 			comparation = -1;
 		}else {
 			comparation = 0;
@@ -127,7 +114,7 @@ public class Player implements Comparable<Player>, Serializable{
 
 	@Override
 	public String toString() {
-		return "Jugador: Nickname=" + nickName + ", Puntos=" + points+", Tiempo jugado= "+timePlayed;
+		return "Jugador: Nickname=" + name + ", Puntos=" + points+", Tiempo jugado= "+timePlayed;
 	}
 	
 

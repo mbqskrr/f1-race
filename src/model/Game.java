@@ -72,7 +72,7 @@ public class Game implements Serialize, IEFile{
 	 * 
 	 * @return
 	 */
-	public Truck getRootT() {
+	public Truck getFirstT() {
 		return firstT;
 	}
 
@@ -80,7 +80,7 @@ public class Game implements Serialize, IEFile{
 	 * 
 	 * @param rootT
 	 */
-	public void setRootT(Truck firstT) {
+	public void setFirstT(Truck firstT) {
 		this.firstT = firstT;
 	}
 
@@ -159,7 +159,7 @@ public class Game implements Serialize, IEFile{
 	private void addPlayer(Player p, Player r) {
 		if (r==null) {
 			this.setRoot(p);
-		}else if(p.getNickName().compareTo(r.getNickName())<=0) {
+		}else if(p.getName().compareTo(r.getName())<=0) {
 			if (r.getLeft()==null) {
 				r.setLeft(p);
 			} else {
@@ -224,7 +224,7 @@ public class Game implements Serialize, IEFile{
 	public List<Player> preOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
 		if (root!=null) {
-			root.getNickName();
+			root.getName();
 			root.getPoints();
 			root.getTimePlayed();
 			playersSorted.add(root);
@@ -243,7 +243,7 @@ public class Game implements Serialize, IEFile{
 		List<Player> playersSorted = new ArrayList<Player>();
 		if (root!=null) {
 			preOrderSort(root.getLeft());
-			root.getNickName();
+			root.getName();
 			root.getPoints();
 			root.getTimePlayed();
 			playersSorted.add(root);
@@ -262,7 +262,7 @@ public class Game implements Serialize, IEFile{
 		if (root!=null) {
 			posOrderSort(root.getLeft());
 			posOrderSort(root.getRight());
-			root.getNickName();
+			root.getName();
 			root.getPoints();
 			root.getTimePlayed();
 			playersSorted.add(root);
@@ -341,8 +341,6 @@ public class Game implements Serialize, IEFile{
 			}
 		}
 		return player;
-		
-		
 	}
 	
 	/**
