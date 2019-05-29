@@ -18,15 +18,15 @@ public interface Serialize {
 	
 	/**
 	 * Este método permite deserializar un archivo de bytes
-	 * @throws IOException
-	 * @throws ClassNotFoundException - No se encontró la clase que debe estar serializada
+	 * @throws IOException IOException
+	 * @throws ClassNotFoundException No se encontró la clase que debe estar serializada
 	 */
 	public void load() throws IOException, ClassNotFoundException;
 	
 	/**
 	 * Este método serializa a bytes
-	 * @throws IOException
-	 * @throws FileNotFoundException - No se encontró la ruta donde se debe guardar los datos serializados
+	 * @throws IOException IOException
+	 * @throws FileNotFoundException No se encontró la ruta donde se debe guardar los datos serializados
 	 */
 	public void save() throws IOException, FileNotFoundException;
 

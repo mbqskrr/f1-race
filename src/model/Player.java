@@ -36,64 +36,64 @@ public class Player extends Person implements Comparable<Player>, Serializable{
 
 
 	/**
-	 * 
-	 * @return
+	 * Método que retorna los puntos obtenidos de un jugador
+	 * @return los puntos de un jugaodr
 	 */
 	public int getPoints() {
 		return points;
 	}
 
 	/**
-	 * 
-	 * @param points
+	 * Método que modifica los puntos de un jugaodr
+	 * @param points puntos de un jugador
 	 */
 	public void setPoints(int points) {
 		this.points = points;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el tiempo que jugó un jugaodr
+	 * @return el tiempo jugado de un jugador
 	 */
 	public String getTimePlayed() {
 		return timePlayed;
 	}
 
 	/**
-	 * 
-	 * @param timePlayed
+	 * Método que modifica el tiempo jugado por un juegador
+	 * @param timePlayed el tiempo que jugó el jugador
 	 */
 	public void setTimePlayed(String timePlayed) {
 		this.timePlayed = timePlayed;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el elemento a la derecha del actual
+	 * @return elemento a la derecha del actual
 	 */
 	public Player getRight() {
 		return right;
 	}
 	
 	/**
-	 * 
-	 * @param right
+	 * Método que modifica el elemento a la derecha del actual
+	 * @param right objeto tipo Player para modifcar el derecho del actual
 	 */
 	public void setRight(Player right) {
 		this.right = right;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el elemento a la derecha del actual
+	 * @return elemento a la izquierdada del actual
 	 */
 	public Player getLeft() {
 		return left;
 	}
 	
 	/**
-	 * 
-	 * @param left
+	 * Método que modifica el elemento a la izquierdada del actual
+	 * @param left objeto tipo Player para modifcar el izquierdo del actual
 	 */
 	public void setLeft(Player left) {
 		this.left = left;

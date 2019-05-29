@@ -95,7 +95,7 @@ public class Game implements Serialize, IEFile{
 
 	/**
 	 * Método que modifica el primer elemento tipo Truck
-	 * @param rootT objeto tipo Truck a modificar
+	 * @param firstT objeto tipo Truck a modificar
 	 */
 	public void setFirstT(Truck firstT) {
 		this.firstT = firstT;

@@ -29,7 +29,9 @@ public interface IEFile {
 	
 	/**
 	 * Este método permite importar los datos de un archivo de texto
-	 * @throws IOException
+	 * @param path la ruta del arcivho
+	 * @param sep el separador para leer el archivo
+	 * @throws IOException IOException
 	 */
 	public void importReport(String path, String sep) throws IOException;
 	

@@ -43,16 +43,16 @@ public class ExecutionTimeThread extends Thread{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Método que retorna los mínutos 
+	 * @return minutos
 	 */
 	public int getMinutes() {
 		return minutes;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Métod que retorna los segundos
+	 * @return segundos
 	 */
 	public int getSeconds() {
 		return seconds;

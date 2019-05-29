@@ -12,10 +12,10 @@ public class Truck  extends Vehicule{
 	private Truck prev;
 	
 	/**
-	 * 
-	 * @param color
-	 * @param width
-	 * @param height
+	 * Método constructor
+	 * @param color color 
+	 * @param width ancho 
+	 * @param height alto
 	 */
 	public Truck(String color, double width, double height) {
 		super(color, width, height);

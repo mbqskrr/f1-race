@@ -34,7 +34,7 @@ public class Car extends Vehicule implements Comparable<Car>{
 	
 	/**
 	 *Método que modifica el siguiente elemento
-	 * @param siguiente elemento del actual
+	 * @param next siguiente elemento del actual a modificar
 	 */
 	public void setNext(Car next) {
 		this.next = next;
@@ -42,7 +42,7 @@ public class Car extends Vehicule implements Comparable<Car>{
 	
 	/**
 	 * Método que retorna las vidas de un carro
-	 * @return
+	 * @return método que retorna las vidas de un carro
 	 */
 	public int getLives() {
 		return lives;

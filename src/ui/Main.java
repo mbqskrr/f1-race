@@ -17,7 +17,7 @@ public class Main extends Application{
 	
 	/**
 	 * Método main
-	 * @param args
+	 * @param args args
 	 */
 	public static void main(String[] args) {
 		launch(args);

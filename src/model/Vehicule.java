@@ -13,10 +13,10 @@ public abstract class Vehicule {
 	protected double height;
 	
 	/**
-	 * 
-	 * @param color
-	 * @param width
-	 * @param height
+	 * Méodo constructor
+	 * @param color color
+	 * @param width ancho
+	 * @param height alto
 	 */
 	public Vehicule(String color, double width, double height) {
 		this.color = color;
@@ -25,48 +25,48 @@ public abstract class Vehicule {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Método que da el color
+	 * @return el color
 	 */
 	public String getColor() {
 		return color;
 	}
 
 	/**
-	 * 
-	 * @param color
+	 * Método que modifica el color
+	 * @param color nuevo color a modificar
 	 */
 	public void setColor(String color) {
 		this.color = color;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que da el ancho
+	 * @return el ancho
 	 */
 	public double getWidth() {
 		return width;
 	}
 
 	/**
-	 * 
-	 * @param width
+	 * Método que modifica el ancho
+	 * @param width ancho
 	 */
 	public void setWidth(double width) {
 		this.width = width;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Método que da la altura
+	 * @return la altura 
 	 */
 	public double getHeight() {
 		return height;
 	}
 	
 	/**
-	 * 
-	 * @param height
+	 * Método que modifica la alutra
+	 * @param height altura
 	 */
 	public void setHeight(double height) {
 		this.height = height;
