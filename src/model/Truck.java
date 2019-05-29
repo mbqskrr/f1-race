@@ -96,14 +96,6 @@ public class Truck  extends Vehicule{
 		return comparation;
 	}*/
 
-	public int getSize() {
-		Truck actual = this;
-		int size = 0;
-		while (actual!=null) {
-			size++;
-			actual = actual.getNext();
-		}
-		return size;
-	}
+
 	
 }

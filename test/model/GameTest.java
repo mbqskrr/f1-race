@@ -3,6 +3,8 @@ package model;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 class GameTest {
 	
 	private Game game;
@@ -23,12 +25,12 @@ class GameTest {
 	
 	private void setUpScenary2() {
 		game = new Game();
-		Truck t = new Truck("GREEN", 90, 130);
-		game.addTruck(t);
-		Truck t1 = new Truck("BLACK", 93, 138);
-		game.addTruck(t1);
-		Truck t2 = new Truck("WHITE", 92, 137);
-		game.addTruck(t2);
+		Car c = new Car(3, "GREEN", 90, 130);
+		game.addCar(c);
+		Car c1 = new Car(2, "BLACK", 93, 138);
+		game.addCar(c1);
+		Car c2 = new Car(1, "WHITE", 92, 137);
+		game.addCar(c2);
 	}
 
 	@org.junit.jupiter.api.Test
@@ -60,34 +62,41 @@ class GameTest {
 	}
 	
 	@org.junit.jupiter.api.Test
-	void getSizeTest() {
-		setUpScenary2();
-		assertEquals(3, game.getFirstT().getSize(), "No se está agregando correctamente el siguiente elemento");
-	}
-	
-	@org.junit.jupiter.api.Test
 	void addCarTest() {
-		
+		setUpScenary();
+		Car c = new Car(3, "YELLOW", 95, 140);
+		game.addCar(c);
+		assertEquals(game.getFirst(), c, "No se agregó el primero elemento a la lista");
 	}
 
 	@org.junit.jupiter.api.Test
 	void preOrderTest() {
 		setUpSceary1();
+		assertTrue("Raíz agregada erroneamente", game.getRoot().getName().equals("César"));
+		List<Player> lp = game.preOrderSort(game.getRoot());
+		assertTrue("Recorrido del ABB Player en preorden incorrecto", lp.get(0).getName().equals("César"));
+		assertEquals(3, lp.size(), "Error al crear el arreglo de preorden");
 	}
 	
 	@org.junit.jupiter.api.Test
 	void inOrderTest() {
 		setUpSceary1();
+		assertTrue("Elemento izquierdo de la raíz agregado erroneamente", game.getRoot().getLeft().getName().equals("Arturo"));
+		List<Player> lp = game.inOrderSort(game.getRoot());
+		assertTrue("Recorrido del ABB Player en inorden incorrecto", lp.get(0).getName().equals("Arturo"));
 	}
 	
 	@org.junit.jupiter.api.Test
 	void posOrderTest() {
 		setUpSceary1();
+		assertTrue("Elemento derecho de la raíz agregado erroneamente", game.getRoot().getRight().getName().equals("Héctor"));
+		List<Player> lp = game.posOrderSort(game.getRoot());
+		assertTrue("Recorrido del ABB Player en posorden incorrecto", lp.get(1).getName().equals("Hector"));
 	}
 	
 	@org.junit.jupiter.api.Test
 	void bubbleSortTest() {
-		
+		setUpScenary2();
 	}
 	
 }

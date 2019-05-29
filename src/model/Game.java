@@ -28,6 +28,8 @@ public class Game implements Serialize, IEFile{
 	private Player root;
 	private Car first;
 	private Truck firstT;
+	private int sizeT;
+	private int sizeC;
 	
 	/**
 	 * 
@@ -74,6 +76,38 @@ public class Game implements Serialize, IEFile{
 	 */
 	public Truck getFirstT() {
 		return firstT;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getSizeT() {
+		return sizeT;
+	}
+
+	/**
+	 * 
+	 * @param sizeT
+	 */
+	public void setSizeT(int sizeT) {
+		this.sizeT = sizeT;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getSizeC() {
+		return sizeC;
+	}
+
+	/**
+	 * 
+	 * @param sizeC
+	 */
+	public void setSizeC(int sizeC) {
+		this.sizeC = sizeC;
 	}
 
 	/**
@@ -183,7 +217,7 @@ public class Game implements Serialize, IEFile{
 	}
 
 	/**
-	 * Métod para agregar un carro enemigo
+	 * Método para agregar un carro enemigo
 	 * @param truck
 	 */
 	public void addTruck(Truck truck) {
@@ -197,6 +231,7 @@ public class Game implements Serialize, IEFile{
 			truck.setNext(firstT);
 			firstT.setPrev(truck);
 		}
+		sizeT++;
 	}
 	
 	/**
@@ -214,6 +249,7 @@ public class Game implements Serialize, IEFile{
 			car.setNext(first);
 			first.setPrev(car);
 		}
+		sizeC++;
 	}
 	
 	/**
@@ -223,13 +259,14 @@ public class Game implements Serialize, IEFile{
 	 */
 	public List<Player> preOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
-		if (root!=null) {
-			root.getName();
-			root.getPoints();
-			root.getTimePlayed();
-			playersSorted.add(root);
-			preOrderSort(root.getLeft());
-			preOrderSort(root.getRight());
+		if (p!=null) {
+			String n = p.getName();
+			int pnt = p.getPoints();
+			String tp = p.getTimePlayed();
+			Player py = new Player(n, pnt, tp);
+			playersSorted.add(py);
+			preOrderSort(p.getLeft());
+			preOrderSort(p.getRight());
 		}
 		return playersSorted;
 	}
@@ -241,13 +278,15 @@ public class Game implements Serialize, IEFile{
 	 */
 	public List<Player> inOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
+		Player py;
 		if (root!=null) {
-			preOrderSort(root.getLeft());
-			root.getName();
-			root.getPoints();
-			root.getTimePlayed();
-			playersSorted.add(root);
-			preOrderSort(root.getRight());
+			inOrderSort(p.getLeft());
+			String n = p.getName();
+			int pnt = p.getPoints();
+			String tp = p.getTimePlayed();
+			py = new Player(n, pnt, tp);
+			playersSorted.add(py);
+			inOrderSort(p.getRight());
 		}
 		return playersSorted;
 	}
@@ -319,7 +358,7 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método privado que permite buscar un jugador.
-	 * <b>pre:</b> Se debe ordenar el ABB de jugadores por preorden.<br>
+	 * <b>pre:</b> Se debe ordenar el ABB de jugadores por inorden.<br>
 	 * @param p - el jugador a buscar
 	 * @return el jugador a buscar, ó null en caso de que el jugador buscado no exista
 	 */
@@ -353,6 +392,5 @@ public class Game implements Serialize, IEFile{
 			throw new NotFoundException("Jugador no encontrado");
 		}
 	}
-	
-	//public void 
+	 
 }
