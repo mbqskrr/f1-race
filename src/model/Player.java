@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 /**
- * 
+ * Clase tipo Árbol
  * @author Manuel Balanta
  *
  */
@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Player extends Person implements Comparable<Player>, Serializable{
 	
 	/**
-	 * 
+	 * Constante
 	 */
 	private static final long serialVersionUID = 1L;
 	private int points;
@@ -20,20 +20,16 @@ public class Player extends Person implements Comparable<Player>, Serializable{
 	private Player left;
 	
 	/**
-	 * 
-	 * @param nickName - nombre del jugador
-	 * @param points - puntos que obtuvo el jugador en la partida
-	 * @param timePlayed - tiempo que disputó la partida el jugador
+	 * Método constructor
+	 * @param nickName nombre del jugador
+	 * @param points puntos que obtuvo el jugador en la partida
+	 * @param timePlayed tiempo que disputó la partida el jugador
 	 */
 	public Player(String nickName, int points, String timePlayed) {
 		super(nickName);
 		this.points = points;
 		this.timePlayed = timePlayed;
 	}
-
-
-	
-
 
 	/**
 	 * Método que retorna los puntos obtenidos de un jugador

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Clase tipo Árbol
+ * Clase tipo Lista Enlazada
  * @author W-7
  *
  */

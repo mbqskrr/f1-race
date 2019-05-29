@@ -15,6 +15,7 @@ import java.util.List;
 
 import exception.NickNameExcpetion;
 import exception.NotFoundException;
+import javafx.scene.paint.Color;
 
 /**
  * Clase principal del modelo del mundo
@@ -142,10 +143,14 @@ public class Game implements Serialize, IEFile{
 		while (line!=null) {
 			String[] parts = line.split(sep);
 			int lives = Integer.parseInt(parts[0]);
-			String color = parts[1];
-			double width = Double.parseDouble(parts[2]);
-			double height = Double.parseDouble(parts[3]);
-			Car c = new Car(lives, color, width, height);
+			double r = Double.parseDouble(parts[1]);
+			double g = Double.parseDouble(parts[2]);
+			double b = Double.parseDouble(parts[3]);
+			double o = Double.parseDouble(parts[4]);
+			Color color = new Color(r, g, b, o);
+			int width = Integer.parseInt(parts[5]);
+			int height = Integer.parseInt(parts[6]);
+			Car c = new Car(lives, color.toString(), width, height);
 			addCar(c);
 			line = br.readLine();
 		}

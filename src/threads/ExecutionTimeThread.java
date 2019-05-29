@@ -16,7 +16,7 @@ public class ExecutionTimeThread extends Thread{
 	
 	/**
 	 * Método constructor para crear un nuevo hilo
-	 * @param raceC - objeto de la clase RaceController
+	 * @param raceC objeto de la clase RaceController
 	 */
 	public ExecutionTimeThread(RaceController raceC) {
 		this.raceC = raceC;
@@ -27,19 +27,22 @@ public class ExecutionTimeThread extends Thread{
 	 */
 	public void run() {
 		while (raceC.isCollisioned() == false) {
-			for (minutes = 0; minutes < 60; minutes++) {
-				for (seconds = 0; seconds < 60; seconds++) {
-					System.out.println(minutes+":"+seconds);
-					raceC.moveTruck();
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+			if (raceC.isCollisioned() == false) {
+				for (minutes = 0; minutes < 60; minutes++) {
+					for (seconds = 0; seconds < 60; seconds++) {
+						System.out.println(minutes+":"+seconds);
+						raceC.moveTruck();
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							//Thread.currentThread().interrupt();
+						}
 					}
 				}
 			}
-		}
 		
+		}
 	}
 	
 	/**

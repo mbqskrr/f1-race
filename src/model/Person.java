@@ -1,13 +1,19 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Clase padre de Player
  * @author W-7
  *
  */
 
-public abstract class Person {
+public abstract class Person implements Serializable{
 	
+	/**
+	 * Constante
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String name;
 
 	/**

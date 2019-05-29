@@ -32,9 +32,6 @@ import javafx.scene.control.Tooltip;
 public class RaceController {
 	
 	private Game game;
-	private Car car;
-	//private Truck truck;
-	private Player player;
 	private Rectangle bodyWork; 
 	private Rectangle wheelL1;
 	private Rectangle wheelL2;
@@ -149,15 +146,6 @@ public class RaceController {
 		try {
 			game.validateNickname(nickName);
 			lblNickname.setText(" "+nickName);
-			player = new Player(nickName, 0, null);
-			game.addPlayer(player);
-			try {
-				game.save();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			visibilityForNext();
 			generateCar();
 			generateMidTruck();
@@ -167,21 +155,15 @@ public class RaceController {
 			//moveKey();
 			info();
 			collision();
-			ett = new ExecutionTimeThread(this);
-			ett.setDaemon(true);
-			ett.start();
+			threads();
 			lblTimePlayed.setText(" "+ett.getMinutes()+":"+ett.getSeconds());
-			pt = new PointsThread();
-			pt.setDaemon(true);
-			pt.start();
-			//pt.interrupt();
 			/*GUIControlThread gut = new GUIControlThread(this);
 			gut.setDaemon(true);
 			gut.start();*/
 			lblPoints.setText(" "+pt.getPoints());
 			jtNickname.setText(null);
-		} catch (NickNameExcpetion e1) {
-			e1.printStackTrace();
+		} catch (NickNameExcpetion e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -194,6 +176,30 @@ public class RaceController {
 		try {
 			game.load();
 			game.importReport(Game.PATH, ",");
+			lblNickname.setText(game.getRoot().getName());
+			lblPoints.setText(String.valueOf(game.getRoot().getPoints()));
+			lblTimePlayed.setText(game.getRoot().getTimePlayed());
+			lblLifes.setText(String.valueOf(game.getFirst().getLives()));
+			bodyWork.setWidth(game.getFirst().getWidth());
+			bodyWork.setHeight(game.getFirst().getHeight());
+			xyLayoutCar();
+			Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
+			bodyWork.setFill(randomColor); 
+			generateMidTruck();
+			generateLeftTruck();
+			generateRightTruck();
+			lane.getChildren().add(bodyWork); 
+			lane.getChildren().add(wheelL1);
+			lane.getChildren().add(wheelL2);
+			lane.getChildren().add(wheelR1);
+			lane.getChildren().add(wheelR2);
+			visibilityForNext();
+			btnLoad.setVisible(false);
+			btnLoad.setDisable(true);
+			btnPlay.setVisible(false);
+			btnPlay.setDisable(true);
+			move();
+			threads();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -213,7 +219,12 @@ public class RaceController {
 			btnNext.setDisable(false);
 			jtNickname.setVisible(true);
 			lblName.setVisible(true);
+			/*pt.interrupt();
+			ett.interrupt();*/
 			collision();
+			xyLayoutMidTruck();
+			xyLayoutRightTruck();
+			xyLayoutLeftTruck();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
@@ -226,6 +237,12 @@ public class RaceController {
 	 */
 	@FXML
 	void save(ActionEvent event) {
+		try {
+			ett.join();
+			pt.join(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		int points = pt.getPoints();
 		int min = ett.getMinutes();
 		int sec = ett.getSeconds();
@@ -367,7 +384,7 @@ public class RaceController {
 	 * Método para agregar información
 	 */
 	private void info() {
-		car = new Car(3, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
+		Car car = new Car(3, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
 		String lifes = String.valueOf(car.getLives());
 		lblLifes.setText(lifes);
 		game.addCar(car);
@@ -379,16 +396,7 @@ public class RaceController {
 	public void generateCar() {
 		  Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
 		  bodyWork.setFill(randomColor); 
-		  bodyWork.setLayoutX(253);
-		  bodyWork.setLayoutY(520);
-		  wheelL1.setLayoutX(241); 
-		  wheelL1.setLayoutY(529);
-		  wheelL2.setLayoutX(242);
-		  wheelL2.setLayoutY(629); 
-		  wheelR1.setLayoutX(348);
-		  wheelR1.setLayoutY(529); 
-		  wheelR2.setLayoutX(348);
-		  wheelR2.setLayoutY(629);
+		  xyLayoutCar();
 		  lane.getChildren().add(bodyWork); 
 		  lane.getChildren().add(wheelL1);
 		  lane.getChildren().add(wheelL2);
@@ -407,16 +415,7 @@ public class RaceController {
 		tWheelR2 = new Rectangle(12, 25, Color.BLACK);
 		Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
 		bwTruck.setFill(randomColor);
-		bwTruck.setLayoutX(255);
-		bwTruck.setLayoutY(14);
-		tWheelL1.setLayoutX(244);
-		tWheelL1.setLayoutY(122);
-		tWheelL2.setLayoutX(244);
-		tWheelL2.setLayoutY(21);
-		tWheelR1.setLayoutX(350);
-		tWheelR1.setLayoutY(122);
-		tWheelR2.setLayoutX(350);
-		tWheelR2.setLayoutY(21);
+		xyLayoutMidTruck();
 		lane.getChildren().add(bwTruck);
 		lane.getChildren().add(tWheelL1);
 		lane.getChildren().add(tWheelL2);
@@ -436,16 +435,7 @@ public class RaceController {
 		t1WheelR2 = new Rectangle(12, 25, Color.BLACK);
 		Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
 		bwTruck1.setFill(randomColor);
-		bwTruck1.setLayoutX(463);
-		bwTruck1.setLayoutY(14);
-		t1WheelL1.setLayoutX(452);
-		t1WheelL1.setLayoutY(122);
-		t1WheelL2.setLayoutX(452);
-		t1WheelL2.setLayoutY(21);
-		t1WheelR1.setLayoutX(558);
-		t1WheelR1.setLayoutY(122);
-		t1WheelR2.setLayoutX(558);
-		t1WheelR2.setLayoutY(21);
+		xyLayoutRightTruck();
 		lane.getChildren().add(bwTruck1);
 		lane.getChildren().add(t1WheelL1);
 		lane.getChildren().add(t1WheelL2);
@@ -465,16 +455,7 @@ public class RaceController {
 		t2WheelR2 = new Rectangle(12, 25, Color.BLACK);
 		Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
 		bwTruck2.setFill(randomColor);
-		bwTruck2.setLayoutX(45);
-		bwTruck2.setLayoutY(14);
-		t2WheelL1.setLayoutX(34);
-		t2WheelL1.setLayoutY(122);
-		t2WheelL2.setLayoutX(34);
-		t2WheelL2.setLayoutY(21);
-		t2WheelR1.setLayoutX(140);
-		t2WheelR1.setLayoutY(122);
-		t2WheelR2.setLayoutX(140);
-		t2WheelR2.setLayoutY(21);
+		xyLayoutLeftTruck();
 		lane.getChildren().add(bwTruck2);
 		lane.getChildren().add(t2WheelL1);
 		lane.getChildren().add(t2WheelL2);
@@ -504,11 +485,11 @@ public class RaceController {
 	
 	/**
 	 * Método privado que permite el movimiento del carro enemigo
-	 * @param bw - la carrocería ó cuerpo del carro
-	 * @param w - primera rueda del carro
-	 * @param w1 - segunda rueda del carro
-	 * @param w2 - tercera rueda del carro
-	 * @param w3 - cuarta rueda del carro
+	 * @param bw la carrocería ó cuerpo del carro
+	 * @param w primera rueda del carro
+	 * @param w1 segunda rueda del carro
+	 * @param w2 tercera rueda del carro
+	 * @param w3 cuarta rueda del carro
 	 */
 	private void moveTruck(Rectangle bw, Rectangle w, Rectangle w1, Rectangle w2, Rectangle w3) {
 		bw.setLayoutY(bw.getLayoutY()+15);
@@ -556,10 +537,6 @@ public class RaceController {
 		moveTruck(bwTruck2, t2WheelL1, t2WheelL2, t2WheelR1, t2WheelR2);
 	}
 
-	/*public Label getLblTimePlayed() {
-		return lblTimePlayed;
-	}*/
-
 	/**
 	 * Método que da el valor de la variable collisioned
 	 * @return - el valor de collisioned
@@ -570,6 +547,7 @@ public class RaceController {
 
 	/**
 	 * Método para ocultar y mostrar ciertos elementos para el evento del botón next
+	 * también funcion para el evento del botón load
 	 */
 	public void visibilityForNext() {
 		btnUp.setVisible(true);
@@ -614,12 +592,84 @@ public class RaceController {
 	
 	/**
 	 * Método que retorna el label que almacena el tiempo jugado
-	 * @return label con el tiempo jugaod
+	 * @return label con el tiempo jugado
 	 * @deprecated
 	 */
 	public Label getLblTimePlayed() {
 		return lblTimePlayed;
 	}
-
 	
+	/**
+	 * Método que le asigna una posición al carro enemigo del carril central
+	 */
+	public void xyLayoutMidTruck() {
+		bwTruck.setLayoutX(255);
+		bwTruck.setLayoutY(14);
+		tWheelL1.setLayoutX(244);
+		tWheelL1.setLayoutY(122);
+		tWheelL2.setLayoutX(244);
+		tWheelL2.setLayoutY(21);
+		tWheelR1.setLayoutX(350);
+		tWheelR1.setLayoutY(122);
+		tWheelR2.setLayoutX(350);
+		tWheelR2.setLayoutY(21);
+	}
+
+	/**
+	 * Método que le asigna una posición al carro enemigo del carril derecho
+	 */
+	public void xyLayoutRightTruck() {
+		bwTruck1.setLayoutX(463);
+		bwTruck1.setLayoutY(14);
+		t1WheelL1.setLayoutX(452);
+		t1WheelL1.setLayoutY(122);
+		t1WheelL2.setLayoutX(452);
+		t1WheelL2.setLayoutY(21);
+		t1WheelR1.setLayoutX(558);
+		t1WheelR1.setLayoutY(122);
+		t1WheelR2.setLayoutX(558);
+		t1WheelR2.setLayoutY(21);
+	}
+	
+	/**
+	 * Método que le asigna una posición al carro enemigo del carril izquierdo
+	 */
+	public void xyLayoutLeftTruck() {
+		bwTruck2.setLayoutX(45);
+		bwTruck2.setLayoutY(14);
+		t2WheelL1.setLayoutX(34);
+		t2WheelL1.setLayoutY(122);
+		t2WheelL2.setLayoutX(34);
+		t2WheelL2.setLayoutY(21);
+		t2WheelR1.setLayoutX(140);
+		t2WheelR1.setLayoutY(122);
+		t2WheelR2.setLayoutX(140);
+		t2WheelR2.setLayoutY(21);
+	}
+
+	/**
+	 * Método que le asigna una posición al carro principal a mover
+	 */
+	public void xyLayoutCar() {
+		bodyWork.setLayoutX(253);
+		  bodyWork.setLayoutY(520);
+		  wheelL1.setLayoutX(241); 
+		  wheelL1.setLayoutY(529);
+		  wheelL2.setLayoutX(242);
+		  wheelL2.setLayoutY(629); 
+		  wheelR1.setLayoutX(348);
+		  wheelR1.setLayoutY(529); 
+		  wheelR2.setLayoutX(348);
+		  wheelR2.setLayoutY(629);
+	}
+	
+	public void threads() {
+		ett = new ExecutionTimeThread(this);
+		ett.setDaemon(true);
+		ett.start();
+		pt = new PointsThread();
+		pt.setDaemon(true);
+		pt.start();
+	}
 }
+
