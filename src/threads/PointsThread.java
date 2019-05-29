@@ -8,7 +8,6 @@ package threads;
 
 public class PointsThread extends Thread{
 	
-	//private RaceController race;
 	private int points;
 	
 	/**

@@ -41,11 +41,19 @@ public class ExecutionTimeThread extends Thread{
 		}
 		
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getMinutes() {
 		return minutes;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getSeconds() {
 		return seconds;
 	}

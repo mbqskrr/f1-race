@@ -260,11 +260,7 @@ public class Game implements Serialize, IEFile{
 	public List<Player> preOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
 		if (p!=null) {
-			String n = p.getName();
-			int pnt = p.getPoints();
-			String tp = p.getTimePlayed();
-			Player py = new Player(n, pnt, tp);
-			playersSorted.add(py);
+			playersSorted.add(p);
 			preOrderSort(p.getLeft());
 			preOrderSort(p.getRight());
 		}
@@ -278,14 +274,9 @@ public class Game implements Serialize, IEFile{
 	 */
 	public List<Player> inOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
-		Player py;
-		if (root!=null) {
+		if (p!=null) {
 			inOrderSort(p.getLeft());
-			String n = p.getName();
-			int pnt = p.getPoints();
-			String tp = p.getTimePlayed();
-			py = new Player(n, pnt, tp);
-			playersSorted.add(py);
+			playersSorted.add(p);
 			inOrderSort(p.getRight());
 		}
 		return playersSorted;
@@ -298,13 +289,10 @@ public class Game implements Serialize, IEFile{
 	 */
 	public List<Player> posOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
-		if (root!=null) {
-			posOrderSort(root.getLeft());
-			posOrderSort(root.getRight());
-			root.getName();
-			root.getPoints();
-			root.getTimePlayed();
-			playersSorted.add(root);
+		if (p!=null) {
+			posOrderSort(p.getLeft());
+			posOrderSort(p.getRight());
+			playersSorted.add(p);
 		}
 		return playersSorted;
 	}

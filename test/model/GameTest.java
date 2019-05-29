@@ -1,9 +1,13 @@
 package model;
 
+
+
+//import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
+
+import exception.NickNameExcpetion;
 
 class GameTest {
 	
@@ -84,6 +88,7 @@ class GameTest {
 		assertTrue("Elemento izquierdo de la raíz agregado erroneamente", game.getRoot().getLeft().getName().equals("Arturo"));
 		List<Player> lp = game.inOrderSort(game.getRoot());
 		assertTrue("Recorrido del ABB Player en inorden incorrecto", lp.get(0).getName().equals("Arturo"));
+		assertEquals(3, lp.size(), "Error al crear el arreglo de preorden");
 	}
 	
 	@org.junit.jupiter.api.Test
@@ -92,11 +97,27 @@ class GameTest {
 		assertTrue("Elemento derecho de la raíz agregado erroneamente", game.getRoot().getRight().getName().equals("Héctor"));
 		List<Player> lp = game.posOrderSort(game.getRoot());
 		assertTrue("Recorrido del ABB Player en posorden incorrecto", lp.get(1).getName().equals("Hector"));
+		assertEquals(3, lp.size(), "Error al crear el arreglo de preorden");
 	}
 	
 	@org.junit.jupiter.api.Test
 	void bubbleSortTest() {
 		setUpScenary2();
+		game.bubbleSort();
+		assertEquals(3, game.getSizeC(), "Error al guardar los nodos en la lista enlazada");
+		assertTrue("Error al ordenar la lista", game.getFirst().getColor().equals("BLACK"));
 	}
+	
+	@org.junit.jupiter.api.Test
+	void validateNameTest() {
+		setUpScenary();
+		try {
+			game.validateNickname(" ");
+			fail("Error al lanzar la excepción");
+		} catch (NickNameExcpetion e) {
+			//assertThat(e.getMessage(), );
+		}
+	}
+
 	
 }
