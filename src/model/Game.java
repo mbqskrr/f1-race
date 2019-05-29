@@ -19,7 +19,6 @@ import exception.NotFoundException;
 /**
  * Clase principal del modelo del mundo
  * @author Manuel Balanta
- *
  */
 
 public class Game implements Serialize, IEFile{
@@ -32,87 +31,71 @@ public class Game implements Serialize, IEFile{
 	private int sizeC;
 	
 	/**
-	 * 
+	 * Constructor clase Game
 	 */
 	public Game() {
 		
 	}
 	
 	/**
-	 * 
-	 * @return - raíz 
+	 * Método que retorna la raíz de la clase Player
+	 * @return la raíz de la clase Player
 	 */
 	public Player getRoot() {
 		return root;
 	}
 
 	/**
-	 * 
-	 * @param root
+	 * Método que modifica la raíz de la clase Player
+	 * @param root objeto de tipo Player para modificar la raíz
 	 */
 	public void setRoot(Player root) {
 		this.root = root;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que da el primero elmento de la lista enlazada de carros
+	 * @return el primer elemento de tipo Car
 	 */
 	public Car getFirst() {
 		return first;
 	}
 
 	/**
-	 * 
-	 * @param first
+	 * Método que modifica el primer elemento de tipo car
+	 * @param first objeto tipo Car para modifcar el primer elemento de la Lista Enlazada
 	 */
 	public void setFirst(Car first) {
 		this.first = first;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el primer elemento de la lista enlazada tipo Truck
+	 * @return el primer elemento tipo Truck
 	 */
 	public Truck getFirstT() {
 		return firstT;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el tamaño de la lista enlazada tipo Truck
+	 * @return el tamaño de la lista enlazada de Truck
 	 */
 	public int getSizeT() {
 		return sizeT;
 	}
 
 	/**
-	 * 
-	 * @param sizeT
-	 */
-	public void setSizeT(int sizeT) {
-		this.sizeT = sizeT;
-	}
-
-	/**
-	 * 
-	 * @return
+	 * Método que retorna el tamaño de la lista enlazada tipo Car
+	 * @return el tamaño de la lista enlazada de Car
 	 */
 	public int getSizeC() {
 		return sizeC;
 	}
 
 	/**
-	 * 
-	 * @param sizeC
-	 */
-	public void setSizeC(int sizeC) {
-		this.sizeC = sizeC;
-	}
-
-	/**
-	 * 
-	 * @param rootT
+	 * Método que modifica el primer elemento tipo Truck
+	 * @param rootT objeto tipo Truck a modificar
 	 */
 	public void setFirstT(Truck firstT) {
 		this.firstT = firstT;
@@ -172,7 +155,7 @@ public class Game implements Serialize, IEFile{
 
 	/**
 	 * Este método permite conocer cuántos nodos tiene el ABB
-	 * @param p - objeto de la clase Player
+	 * @param p objeto de la clase Player
 	 * @return el número de nodos que tiene el ABB
 	 */
 	public int getWeight(Player p) {
@@ -187,8 +170,8 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método privado para agregar un jugador
-	 * @param p - un jugador cualquiera
-	 * @param r - la raíz de la clase Player
+	 * @param p un jugador cualquiera
+	 * @param r la raíz de la clase Player
 	 */
 	private void addPlayer(Player p, Player r) {
 		if (r==null) {
@@ -210,7 +193,7 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método público para agregar un jugador
-	 * @param p - el jugador a agregar
+	 * @param p el jugador a agregar
 	 */
 	public void addPlayer(Player p) {
 		addPlayer(p, this.root);
@@ -218,7 +201,7 @@ public class Game implements Serialize, IEFile{
 
 	/**
 	 * Método para agregar un carro enemigo
-	 * @param truck
+	 * @param truck el nuevo objeto tipo Truck a agregar
 	 */
 	public void addTruck(Truck truck) {
 		if (firstT == null) {
@@ -236,7 +219,7 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método para agregar un carro 
-	 * @param car
+	 * @param car el nuevo objeto tipo Car para añadir
 	 */
 	public void addCar(Car car) {
 		if (first == null) {
@@ -254,8 +237,8 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método para ordenar en preorden los objetos de la clase Player
-	 * @param p - un objeto de tipo Player
-	 * @return - una lista con los jugadores ordenados
+	 * @param p un objeto de tipo Player
+	 * @return una lista con los jugadores ordenados
 	 */
 	public List<Player> preOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
@@ -269,8 +252,8 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método para ordenar en inorden los objetos de la clase Player
-	 * @param p - un objeto de tipo Player
-	 * @return - una lista con los jugaodres ordenados
+	 * @param p un objeto de tipo Player
+	 * @return una lista con los jugaodres ordenados
 	 */
 	public List<Player> inOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
@@ -284,8 +267,8 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método para ordenar en posorden los objetos de la clase Player
-	 * @param p - un objeto de tipo Player
-	 * @return - una lista con los jugadores ordenados
+	 * @param p un objeto de tipo Player
+	 * @return una lista con los jugadores ordenados
 	 */
 	public List<Player> posOrderSort(Player p) {
 		List<Player> playersSorted = new ArrayList<Player>();
@@ -299,7 +282,7 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método para ordenar con burbuja los objetos de tipo Car
-	 * <b>pos</b> Se ha ordenado la list enlazada de tipo Car
+	 * <b>pos</b> Se ha ordenado la list enlazada de tipo Car lexicográficamente según el color
 	 */
 	public void bubbleSort() {
 		if(first != null) {
@@ -335,8 +318,8 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método para validar el nickname de un jugador
-	 * @param nn - el nickname del jugador
-	 * @throws NickNameExcpetion - el nickname no es válido
+	 * @param nn  el nickname del jugador
+	 * @throws NickNameExcpetion  el nickname no es válido
 	 */
 	public void validateNickname(String nn) throws NickNameExcpetion{
 		if (nn.equals("") || nn == null || nn.equals(" ")) {
@@ -345,9 +328,9 @@ public class Game implements Serialize, IEFile{
 	}
 	
 	/**
-	 * Método privado que permite buscar un jugador.
+	 * Método privado que permite buscar un jugador, mediante busqueda binaria.
 	 * <b>pre:</b> Se debe ordenar el ABB de jugadores por inorden.<br>
-	 * @param p - el jugador a buscar
+	 * @param p el jugador a buscar
 	 * @return el jugador a buscar, ó null en caso de que el jugador buscado no exista
 	 */
 	private Player binarySearch(Player p) {
@@ -372,8 +355,8 @@ public class Game implements Serialize, IEFile{
 	
 	/**
 	 * Método público para buscar un jugador
-	 * @param p - objeto tipo player a buscar 
-	 * @throws NotFoundException - Si el jugador buscado no existe
+	 * @param p objeto tipo player a buscar 
+	 * @throws NotFoundException Si el jugador buscado no existe
 	 */
 	public void searchPlayer(Player p) throws NotFoundException{
 		if (binarySearch(p) == null) {

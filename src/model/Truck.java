@@ -1,7 +1,7 @@
 package model;
 
 /**
- * 
+ * Clase tipo Lista Enlazada
  * @author Manuel Balanta
  *
  */
@@ -22,32 +22,32 @@ public class Truck  extends Vehicule{
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el elmento siguiente del actual
+	 * @return elemento siguiente del actual
 	 */
 	public Truck getNext() {
 		return next;
 	}
 
 	/**
-	 * 
-	 * @param next
+	 * Método que modifica el siguiente elmento del acutal
+	 * @param next nuevo elemento a modificar
 	 */
 	public void setNext(Truck next) {
 		this.next = next;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el elemento previo del actual
+	 * @return elemento previo del actual
 	 */
 	public Truck getPrev() {
 		return prev;
 	}
 
 	/**
-	 * 
-	 * @param prev
+	 * Método que modifica el elemento previo del actual
+	 * @param prev nuevo elemento previo al actual
 	 */
 	public void setPrev(Truck prev) {
 		this.prev = prev;

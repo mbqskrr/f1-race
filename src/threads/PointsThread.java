@@ -39,7 +39,7 @@ public class PointsThread extends Thread{
 	
 	/**
 	 * Método que da los puntos 
-	 * @return - puntos obtenidos en el juego
+	 * @return puntos obtenidos en el juego
 	 */
 	public int getPoints() {
 		return points;

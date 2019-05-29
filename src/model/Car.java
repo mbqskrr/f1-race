@@ -1,7 +1,7 @@
 package model;
 
 /**
- * 
+ * Clase tipo Árbol
  * @author W-7
  *
  */
@@ -14,10 +14,10 @@ public class Car extends Vehicule implements Comparable<Car>{
 	
 	/**
 	 * Método constructor de la clase Player
-	 * @param lives - vidas del carro
-	 * @param color - color del carro 
-	 * @param width - ancho del carro
-	 * @param height - alto del carro
+	 * @param lives vidas del carro
+	 * @param color color del carro 
+	 * @param width ancho del carro
+	 * @param height alto del carro
 	 */
 	public Car(int lives, String color, double width, double height) {
 		super(color, width, height);
@@ -25,23 +25,23 @@ public class Car extends Vehicule implements Comparable<Car>{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Método que da el siguiente elemento
+	 * @return el siguiente elemento del actual
 	 */
 	public Car getNext() {
 		return next;
 	}
 	
 	/**
-	 * 
-	 * @param next
+	 *Método que modifica el siguiente elemento
+	 * @param siguiente elemento del actual
 	 */
 	public void setNext(Car next) {
 		this.next = next;
 	}
 	
 	/**
-	 * 
+	 * Método que retorna las vidas de un carro
 	 * @return
 	 */
 	public int getLives() {
@@ -49,24 +49,24 @@ public class Car extends Vehicule implements Comparable<Car>{
 	}
 	
 	/**
-	 * 
-	 * @param lives
+	 * Método que modifica las vidas de un carro
+	 * @param lives vidas de un carro
 	 */
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Método que retorna el elemento previo al actual
+	 * @return elemento previo al actual
 	 */
 	public Car getPrev() {
 		return prev;
 	}
 	
 	/**
-	 * 
-	 * @param prev
+	 * Método que modifica el elemento previo al actual
+	 * @param prev elemento para modificar el previo del actual
 	 */
 	public void setPrev(Car prev) {
 		this.prev = prev;

@@ -2,14 +2,14 @@ package exception;
 
 /**
  * Clase para lanzar una excepción en el momento que un jugador buscado no sea encontrado
- * @author W-7
+ * @author Manuel Balanta
  *
  */
 
 public class NotFoundException extends Exception{
 
 	/**
-	 * 
+	 * Constate
 	 */
 	private static final long serialVersionUID = 1L;
 	

@@ -11,7 +11,7 @@ public class NickNameExcpetion extends Exception{
 	
 	/**
 	 * Método constructor
-	 * @param message - mensaje para lanza la excepción
+	 * @param message mensaje para lanzar la excepción
 	 */
 	public NickNameExcpetion(String message) {
 		super(message);

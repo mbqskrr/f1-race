@@ -1,16 +1,30 @@
 package threads;
 
-//import javafx.application.Platform;
-//import ui.RaceController;
+import javafx.application.Platform;
+import ui.RaceController;
+
+/**
+ * Hilo encargado de ejecutar la lcase UpdateRunnable
+ * @author Manuel Balanta
+ * @deprecated
+ *
+ */
 
 public class GUIControlThread extends Thread{
 	
-	/*private RaceController raceC;
-
+	private RaceController raceC;
+	
+	/**
+	 * Constructor 
+	 * @param raceC objeto tipo RaceController
+	 */
 	public GUIControlThread(RaceController raceC) {
 		this.raceC = raceC;
 	};
 	
+	/**
+	 * Método que ejecuta UpdateRunnable
+	 */
 	public void run() {
 		while (true) {
 			UpdateRunnable gct = new UpdateRunnable(raceC);
@@ -18,11 +32,10 @@ public class GUIControlThread extends Thread{
 			try {
 				sleep(1);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
-	}*/
+	}
 
 }

@@ -125,7 +125,7 @@ public class RaceController {
 	
 	/**
 	 * Método para comenzar la partida y realizar el logeo del jugador
-	 * @param event
+	 * @param event evento del botón
 	 */
 	@FXML
 	public void play(ActionEvent event) {
@@ -141,7 +141,7 @@ public class RaceController {
 	
 	/**
 	 * Método principal para dar inicio a la partida, después de haberse logeado el jugador
-	 * @param event
+	 * @param event evento del botón
 	 */
 	@FXML
     void next(ActionEvent event) {
@@ -164,7 +164,7 @@ public class RaceController {
 			generateLeftTruck();
 			generateRightTruck();
 			move();
-			moveKey();
+			//moveKey();
 			info();
 			collision();
 			ett = new ExecutionTimeThread(this);
@@ -187,7 +187,7 @@ public class RaceController {
 	}
 	/**
 	 * Método para cargar una partida con un archivo de texto y deserialización
-	 * @param event
+	 * @param event evento del botón
 	 */
 	@FXML
     void load(ActionEvent event) {
@@ -203,7 +203,7 @@ public class RaceController {
 	
 	/**
 	 * Método para resetear la partida
-	 * @param event
+	 * @param event evento del botón
 	 */
 	@FXML
 	void reset(ActionEvent event) {
@@ -222,7 +222,7 @@ public class RaceController {
 
 	/**
 	 * Método para guardar una partida
-	 * @param event
+	 * @param event evento del botón
 	 */
 	@FXML
 	void save(ActionEvent event) {
@@ -363,6 +363,9 @@ public class RaceController {
 		});
 	}
 	
+	/**
+	 * Método para agregar información
+	 */
 	private void info() {
 		car = new Car(3, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
 		String lifes = String.valueOf(car.getLives());
@@ -481,7 +484,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * 
+	 * @deprecated
 	 */
 	public void collision(/*Rectangle r, Rectangle r1, Rectangle r2, Rectangle r3*/) {
 		/*btnReset.setOnMouseClicked(new EventHandler<Event>() {
@@ -527,7 +530,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método para generar los Tooltip de los botones que permited mover e carro
+	 * Método para generar los Tooltip de los botones que permiten mover el carro
 	 */
 	public void generateTooltip() {
 		ttU = new Tooltip();
@@ -583,6 +586,9 @@ public class RaceController {
 		btnReset.setVisible(true);
 	}
 	
+	/**
+	 * @deprecated
+	 */
 	public void moveKey() {
 		lane.setOnKeyPressed(e -> {
 			RaceController rc = new RaceController();
@@ -605,5 +611,15 @@ public class RaceController {
 		}
 		);
 	}
+	
+	/**
+	 * Método que retorna el label que almacena el tiempo jugado
+	 * @return label con el tiempo jugaod
+	 * @deprecated
+	 */
+	public Label getLblTimePlayed() {
+		return lblTimePlayed;
+	}
+
 	
 }

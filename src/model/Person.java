@@ -1,7 +1,7 @@
 package model;
 
 /**
- * 
+ * Clase padre de Player
  * @author W-7
  *
  */
@@ -11,24 +11,24 @@ public abstract class Person {
 	protected String name;
 
 	/**
-	 * 
-	 * @param name
+	 * Método constructor
+	 * @param name el nombre de la persona
 	 */
 	public Person(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Método que da el nombre de una persona
+	 * @return el nombre de una persona
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * 
-	 * @param name
+	 * Método para modificar el nombre de una persona
+	 * @param name el nombre de la persona
 	 */
 	public void setName(String name) {
 		this.name = name;
