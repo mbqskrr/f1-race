@@ -663,6 +663,9 @@ public class RaceController {
 		  wheelR2.setLayoutY(629);
 	}
 	
+	/**
+	 * Este método permite crear los hilos
+	 */
 	public void threads() {
 		ett = new ExecutionTimeThread(this);
 		ett.setDaemon(true);
