@@ -20,12 +20,13 @@ class GameTest {
 	
 	private void setUpSceary1() {
 		game = new Game();
-		Player p = new Player("César", 6, "2:35");
+		Player p = new Player("Cï¿½sar", 6, "2:35");
 		game.addPlayer(p);
-		Player p1 = new Player("Héctor", 8, "2:55");
+		Player p1 = new Player("Hï¿½ctor", 8, "2:55");
 		game.addPlayer(p1);
 		Player p2 = new Player("Arturo", 10, "3:59");
 		game.addPlayer(p2);
+		System.out.println(game.getWeight(p)+"");
 	}
 	
 	private void setUpScenary2() {
@@ -43,17 +44,17 @@ class GameTest {
 		setUpScenary();
 		Player p = new Player("Camilo", 7, "1:23");
 		game.addPlayer(p);
-		assertTrue("No se agregó la raíz", game.getRoot().getName().equals(p.name));
+		assertTrue("No se agregï¿½ la raï¿½z", game.getRoot().getName().equals(p.name));
 	}
 	
 	@org.junit.jupiter.api.Test
 	void getWeightTest() {
 		setUpScenary();
-		Player p = new Player("Hernán", 8, "3:47");
+		Player p = new Player("Hernï¿½n", 8, "3:47");
 		game.addPlayer(p);
 		Player p1 = new Player("Jonas", 25, "10:31");
 		game.addPlayer(p1);
-		assertEquals(2, game.getWeight(p), "No se están agregando correctamente los nodos al árbol");
+		assertEquals(2, game.getWeight(p), "No se estï¿½n agregando correctamente los nodos al ï¿½rbol");
 	}
 	
 	@org.junit.jupiter.api.Test
@@ -63,7 +64,7 @@ class GameTest {
 		game.addTruck(t);
 		Truck t1 = new Truck("RED", 94, 139);
 		game.addTruck(t1);
-		assertTrue("No se agregó correctamente el primer elemento a la lista enlazada", game.getFirstT().getColor().equals(t.getColor()));
+		assertTrue("No se agregï¿½ correctamente el primer elemento a la lista enlazada", game.getFirstT().getColor().equals(t.getColor()));
 	}
 	
 	@org.junit.jupiter.api.Test
@@ -71,22 +72,22 @@ class GameTest {
 		setUpScenary();
 		Car c = new Car(3, "YELLOW", 95, 140);
 		game.addCar(c);
-		assertEquals(game.getFirst(), c, "No se agregó el primero elemento a la lista");
+		assertEquals(game.getFirst(), c, "No se agregï¿½ el primero elemento a la lista");
 	}
 
 	@org.junit.jupiter.api.Test
 	void preOrderTest() {
 		setUpSceary1();
-		assertTrue("Raíz agregada erroneamente", game.getRoot().getName().equals("César"));
+		assertTrue("Raï¿½z agregada erroneamente", game.getRoot().getName().equals("Cï¿½sar"));
 		List<Player> lp = game.preOrderSort(game.getRoot());
-		assertTrue("Recorrido del ABB Player en preorden incorrecto", lp.get(0).getName().equals("César"));
+		assertTrue("Recorrido del ABB Player en preorden incorrecto", lp.get(0).getName().equals("Cï¿½sar"));
 		assertEquals(3, lp.size(), "Error al crear el arreglo de preorden");
 	}
 	
 	@org.junit.jupiter.api.Test
 	void inOrderTest() {
 		setUpSceary1();
-		assertTrue("Elemento izquierdo de la raíz agregado erroneamente", game.getRoot().getLeft().getName().equals("Arturo"));
+		assertTrue("Elemento izquierdo de la raï¿½z agregado erroneamente", game.getRoot().getLeft().getName().equals("Arturo"));
 		List<Player> lp = game.inOrderSort(game.getRoot());
 		assertTrue("Recorrido del ABB Player en inorden incorrecto", lp.get(0).getName().equals("Arturo"));
 		assertEquals(3, lp.size(), "Error al crear el arreglo de preorden");
@@ -95,7 +96,7 @@ class GameTest {
 	@org.junit.jupiter.api.Test
 	void posOrderTest() {
 		setUpSceary1();
-		assertTrue("Elemento derecho de la raíz agregado erroneamente", game.getRoot().getRight().getName().equals("Héctor"));
+		assertTrue("Elemento derecho de la raï¿½z agregado erroneamente", game.getRoot().getRight().getName().equals("Hï¿½ctor"));
 		List<Player> lp = game.posOrderSort(game.getRoot());
 		assertTrue("Recorrido del ABB Player en posorden incorrecto", lp.get(1).getName().equals("Hector"));
 		assertEquals(3, lp.size(), "Error al crear el arreglo de preorden");
@@ -114,7 +115,7 @@ class GameTest {
 		setUpScenary();
 		try {
 			game.validateNickname(" ");
-			fail("Error al lanzar la excepción");
+			fail("Error al lanzar la excepciï¿½n");
 		} catch (NickNameExcpetion e) {
 			e.printStackTrace();
 		}

@@ -111,18 +111,19 @@ public class RaceController {
 	private PointsThread pt;
 	
 	/**
-	 * Método que inicializa la clase
+	 * Mï¿½todo que inicializa la clase
 	 */
 	public void initialize() {
 		game = new Game();
 		initializeCar();
 		generateTooltip();
 		collisioned = false;
+		moveKey();
 	}
 	
 	/**
-	 * Método para comenzar la partida y realizar el logeo del jugador
-	 * @param event evento del botón
+	 * Mï¿½todo para comenzar la partida y realizar el logeo del jugador
+	 * @param event evento del botï¿½n
 	 */
 	@FXML
 	public void play(ActionEvent event) {
@@ -137,8 +138,8 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método principal para dar inicio a la partida, después de haberse logeado el jugador
-	 * @param event evento del botón
+	 * Mï¿½todo principal para dar inicio a la partida, despuï¿½s de haberse logeado el jugador
+	 * @param event evento del botï¿½n
 	 */
 	@FXML
     void next(ActionEvent event) {
@@ -162,14 +163,15 @@ public class RaceController {
 			gut.start();*/
 			lblPoints.setText(" "+pt.getPoints());
 			jtNickname.setText(null);
+			
 		} catch (NickNameExcpetion e) {
 			e.printStackTrace();
 		}
 		
 	}
 	/**
-	 * Método para cargar una partida con un archivo de texto y deserialización
-	 * @param event evento del botón
+	 * Mï¿½todo para cargar una partida con un archivo de texto y deserializaciï¿½n
+	 * @param event evento del botï¿½n
 	 */
 	@FXML
     void load(ActionEvent event) {
@@ -208,8 +210,8 @@ public class RaceController {
     }
 	
 	/**
-	 * Método para resetear la partida
-	 * @param event evento del botón
+	 * Mï¿½todo para resetear la partida
+	 * @param event evento del botï¿½n
 	 */
 	@FXML
 	void reset(ActionEvent event) {
@@ -232,8 +234,8 @@ public class RaceController {
 	}
 
 	/**
-	 * Método para guardar una partida
-	 * @param event evento del botón
+	 * Mï¿½todo para guardar una partida
+	 * @param event evento del botï¿½n
 	 */
 	@FXML
 	void save(ActionEvent event) {
@@ -272,7 +274,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método público que contiene todos los movimientos del carro
+	 * Mï¿½todo pï¿½blico que contiene todos los movimientos del carro
 	 */
 	public void move() {
 		moveUp();
@@ -282,7 +284,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método para mover el carro hacia arriba
+	 * Mï¿½todo para mover el carro hacia arriba
 	 */
 	private void moveUp() {
 		btnUp.setOnMouseClicked(new EventHandler<Event>() {
@@ -306,8 +308,34 @@ public class RaceController {
 		});		 
 	}
 	
+	private void moveUpKey() {
+		btnUp.setOnKeyPressed(e -> {
+				switch (e.getCode()) {
+				case W:
+					if (bodyWork.getLayoutY()<=10) {
+						bodyWork.setLayoutY(bodyWork.getLayoutY()+15);
+						wheelL1.setLayoutY(wheelL1.getLayoutY()+15);
+			  		  	wheelL2.setLayoutY(wheelL2.getLayoutY()+15);
+			  		  	wheelR1.setLayoutY(wheelR1.getLayoutY()+15);
+			  		  	wheelR2.setLayoutY(wheelR2.getLayoutY()+15); 
+					} else {
+						bodyWork.setLayoutY(bodyWork.getLayoutY()-25);
+						wheelL1.setLayoutY(wheelL1.getLayoutY()-25);
+						wheelL2.setLayoutY(wheelL2.getLayoutY()-25);
+						wheelR1.setLayoutY(wheelR1.getLayoutY()-25);
+						wheelR2.setLayoutY(wheelR2.getLayoutY()-25); 
+					}
+					break;
+
+				default:
+					break;
+				}
+				
+		});
+	}
+	
 	/**
-	 * Método para mover el carro hacia abajo
+	 * Mï¿½todo para mover el carro hacia abajo
 	 */
 	private void moveDown() {
 		btnDown.setOnMouseClicked(new EventHandler<Event>() {
@@ -331,8 +359,33 @@ public class RaceController {
 		});
 	}
 	
+	private void moveDownKey() {
+		btnDown.setOnKeyPressed(e -> {
+			switch (e.getCode()) {
+			case S:
+				if (bodyWork.getLayoutY()>=525) {
+					bodyWork.setLayoutY(bodyWork.getLayoutY()-15);
+					wheelL1.setLayoutY(wheelL1.getLayoutY()-15);
+					wheelL2.setLayoutY(wheelL2.getLayoutY()-15);
+					wheelR1.setLayoutY(wheelR1.getLayoutY()-15);
+					wheelR2.setLayoutY(wheelR2.getLayoutY()-15);
+				} else {
+					bodyWork.setLayoutY(bodyWork.getLayoutY()+25);
+					wheelL1.setLayoutY(wheelL1.getLayoutY()+25);
+					wheelL2.setLayoutY(wheelL2.getLayoutY()+25);
+					wheelR1.setLayoutY(wheelR1.getLayoutY()+25);
+					wheelR2.setLayoutY(wheelR2.getLayoutY()+25);
+				}
+				break;
+
+			default:
+				break;
+			}
+		});
+	}
+	
 	/**
-	 * Método para mover el carro hacia la derecha
+	 * Mï¿½todo para mover el carro hacia la derecha
 	 */
 	private void moveRight() {
 		btnRight.setOnMouseClicked(new EventHandler<Event>() {
@@ -355,8 +408,33 @@ public class RaceController {
 		});
 	}
 	
+	private void moveRightKey() {
+		btnRight.setOnKeyPressed(e-> {
+			switch (e.getCode()) {
+			case D:
+				if (bodyWork.getLayoutX()>=480) {
+					bodyWork.setLayoutX(bodyWork.getLayoutX()-15);
+					wheelL1.setLayoutX(wheelL1.getLayoutX()-15);
+					wheelL2.setLayoutX(wheelL2.getLayoutX()-15);
+					wheelR1.setLayoutX(wheelR1.getLayoutX()-15);
+					wheelR2.setLayoutX(wheelR2.getLayoutX()-15);
+				} else {
+					bodyWork.setLayoutX(bodyWork.getLayoutX()+25);
+					wheelL1.setLayoutX(wheelL1.getLayoutX()+25);
+					wheelL2.setLayoutX(wheelL2.getLayoutX()+25);
+					wheelR1.setLayoutX(wheelR1.getLayoutX()+25);
+					wheelR2.setLayoutX(wheelR2.getLayoutX()+25);
+				}
+				break;
+
+			default:
+				break;
+			}
+		});
+	}
+	
 	/**
-	 * Método para mover el carro hacia la izquierda
+	 * Mï¿½todo para mover el carro hacia la izquierda
 	 */
 	private void moveLeft() {
 		btnLeft.setOnMouseClicked(new EventHandler<Event>() {
@@ -380,8 +458,35 @@ public class RaceController {
 		});
 	}
 	
+	private void moveLeftKey() {
+		btnLeft.setOnKeyPressed(e -> {
+			switch (e.getCode()) {
+			case A:
+				if (bodyWork.getLayoutX()<=20) {
+					bodyWork.setLayoutX(bodyWork.getLayoutX()+15);
+					wheelL1.setLayoutX(wheelL1.getLayoutX()+15);
+					wheelL2.setLayoutX(wheelL2.getLayoutX()+15);
+					wheelR1.setLayoutX(wheelR1.getLayoutX()+15);
+					wheelR2.setLayoutX(wheelR2.getLayoutX()+15);
+				} else {
+					bodyWork.setLayoutX(bodyWork.getLayoutX()-25);
+					wheelL1.setLayoutX(wheelL1.getLayoutX()-25);
+					wheelL2.setLayoutX(wheelL2.getLayoutX()-25);
+					wheelR1.setLayoutX(wheelR1.getLayoutX()-25);
+					wheelR2.setLayoutX(wheelR2.getLayoutX()-25);
+				}
+				
+		
+				break;
+
+			default:
+				break;
+			}
+		});
+	}
+	
 	/**
-	 * Método para agregar información
+	 * Mï¿½todo para agregar informaciï¿½n
 	 */
 	private void info() {
 		Car car = new Car(3, bodyWork.getFill().toString(), bodyWork.getWidth(), bodyWork.getHeight());
@@ -391,7 +496,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método que genera el carro principal
+	 * Mï¿½todo que genera el carro principal
 	 */
 	public void generateCar() {
 		  Color randomColor = new Color(Math.random(),Math.random(),Math.random(),1);
@@ -405,7 +510,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método que genera el carro enemigo del carril central
+	 * Mï¿½todo que genera el carro enemigo del carril central
 	 */
 	public void generateMidTruck() {
 		bwTruck = new Rectangle(95, 140); 
@@ -425,7 +530,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método que genera el carro enemigo del carril derecho
+	 * Mï¿½todo que genera el carro enemigo del carril derecho
 	 */
 	public void generateRightTruck() {
 		bwTruck1 = new Rectangle(95, 140); 
@@ -445,7 +550,7 @@ public class RaceController {
 	} 
 	
 	/**
-	 * Método que genera el carro enemigo del carril izquierdo
+	 * Mï¿½todo que genera el carro enemigo del carril izquierdo
 	 */
 	public void generateLeftTruck() {
 		bwTruck2 = new Rectangle(95, 140); 
@@ -484,8 +589,8 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método privado que permite el movimiento del carro enemigo
-	 * @param bw la carrocería ó cuerpo del carro
+	 * Mï¿½todo privado que permite el movimiento del carro enemigo
+	 * @param bw la carrocerï¿½a ï¿½ cuerpo del carro
 	 * @param w primera rueda del carro
 	 * @param w1 segunda rueda del carro
 	 * @param w2 tercera rueda del carro
@@ -500,7 +605,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método para inicializar el carro
+	 * Mï¿½todo para inicializar el carro
 	 */
 	public void initializeCar() {
 		bodyWork = new Rectangle(95, 140);
@@ -511,17 +616,17 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método para generar los Tooltip de los botones que permiten mover el carro
+	 * Mï¿½todo para generar los Tooltip de los botones que permiten mover el carro
 	 */
 	public void generateTooltip() {
 		ttU = new Tooltip();
 		ttD = new Tooltip();
 		ttR = new Tooltip();
 		ttL = new Tooltip();
-		ttU.setText("Úsalo para mover el\ncarro hacia arriba");
-		ttD.setText("Úsalo para mover el\ncarro hacia abajo");
-		ttR.setText("Úsalo para mover el\ncarro hacia la derecha");
-		ttL.setText("Úsalo para mover el\ncarro hacia la izquierda");
+		ttU.setText("ï¿½salo para mover el\ncarro hacia arriba");
+		ttD.setText("ï¿½salo para mover el\ncarro hacia abajo");
+		ttR.setText("ï¿½salo para mover el\ncarro hacia la derecha");
+		ttL.setText("ï¿½salo para mover el\ncarro hacia la izquierda");
 		btnUp.setTooltip(ttU);
 		btnDown.setTooltip(ttD);
 		btnLeft.setTooltip(ttL);
@@ -529,7 +634,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método público para mover los 4 enemigos
+	 * Mï¿½todo pï¿½blico para mover los 4 enemigos
 	 */
 	public void moveTruck() {
 		moveTruck(bwTruck, tWheelL1, tWheelL2, tWheelR1, tWheelR2);
@@ -538,7 +643,7 @@ public class RaceController {
 	}
 
 	/**
-	 * Método que da el valor de la variable collisioned
+	 * Mï¿½todo que da el valor de la variable collisioned
 	 * @return - el valor de collisioned
 	 */
 	public boolean isCollisioned() {
@@ -546,8 +651,8 @@ public class RaceController {
 	}
 
 	/**
-	 * Método para ocultar y mostrar ciertos elementos para el evento del botón next
-	 * también funcion para el evento del botón load
+	 * Mï¿½todo para ocultar y mostrar ciertos elementos para el evento del botï¿½n next
+	 * tambiï¿½n funcion para el evento del botï¿½n load
 	 */
 	public void visibilityForNext() {
 		btnUp.setVisible(true);
@@ -564,34 +669,16 @@ public class RaceController {
 		btnReset.setVisible(true);
 	}
 	
-	/**
-	 * @deprecated
-	 */
+	
 	public void moveKey() {
-		lane.setOnKeyPressed(e -> {
-			RaceController rc = new RaceController();
-			switch (e.getCode()) {
-			case W:
-				rc.moveUp();
-				break;
-			case S:
-				rc.moveDown();
-				break;
-			case A:
-				rc.moveLeft();
-				break;
-			case D:
-				rc.moveRight();
-				break;
-			default:
-				break;
-			}
-		}
-		);
+		moveUpKey();
+		moveDownKey();
+		moveRightKey();
+		moveLeftKey();
 	}
 	
 	/**
-	 * Método que retorna el label que almacena el tiempo jugado
+	 * Mï¿½todo que retorna el label que almacena el tiempo jugado
 	 * @return label con el tiempo jugado
 	 * @deprecated
 	 */
@@ -600,7 +687,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método que le asigna una posición al carro enemigo del carril central
+	 * Mï¿½todo que le asigna una posiciï¿½n al carro enemigo del carril central
 	 */
 	public void xyLayoutMidTruck() {
 		bwTruck.setLayoutX(255);
@@ -616,7 +703,7 @@ public class RaceController {
 	}
 
 	/**
-	 * Método que le asigna una posición al carro enemigo del carril derecho
+	 * Mï¿½todo que le asigna una posiciï¿½n al carro enemigo del carril derecho
 	 */
 	public void xyLayoutRightTruck() {
 		bwTruck1.setLayoutX(463);
@@ -632,7 +719,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Método que le asigna una posición al carro enemigo del carril izquierdo
+	 * Mï¿½todo que le asigna una posiciï¿½n al carro enemigo del carril izquierdo
 	 */
 	public void xyLayoutLeftTruck() {
 		bwTruck2.setLayoutX(45);
@@ -648,7 +735,7 @@ public class RaceController {
 	}
 
 	/**
-	 * Método que le asigna una posición al carro principal a mover
+	 * Mï¿½todo que le asigna una posiciï¿½n al carro principal a mover
 	 */
 	public void xyLayoutCar() {
 		bodyWork.setLayoutX(253);
@@ -664,7 +751,7 @@ public class RaceController {
 	}
 	
 	/**
-	 * Este método permite crear los hilos
+	 * Este mï¿½todo permite crear los hilos
 	 */
 	public void threads() {
 		ett = new ExecutionTimeThread(this);
@@ -674,5 +761,29 @@ public class RaceController {
 		pt.setDaemon(true);
 		pt.start();
 	}
+	
+	/*@FXML
+    void moveW(KeyEvent event) {
+		switch (event.getCode()) {
+		case W:
+			if (bodyWork.getLayoutY()<=10) {
+				bodyWork.setLayoutY(bodyWork.getLayoutY()+15);
+				wheelL1.setLayoutY(wheelL1.getLayoutY()+15);
+	  		  	wheelL2.setLayoutY(wheelL2.getLayoutY()+15);
+	  		  	wheelR1.setLayoutY(wheelR1.getLayoutY()+15);
+	  		  	wheelR2.setLayoutY(wheelR2.getLayoutY()+15); 
+			} else {
+				bodyWork.setLayoutY(bodyWork.getLayoutY()-25);
+				wheelL1.setLayoutY(wheelL1.getLayoutY()-25);
+				wheelL2.setLayoutY(wheelL2.getLayoutY()-25);
+				wheelR1.setLayoutY(wheelR1.getLayoutY()-25);
+				wheelR2.setLayoutY(wheelR2.getLayoutY()-25); 
+			}
+			break;
+		default:
+			break;
+		}
+    }*/
+	
 }
 
